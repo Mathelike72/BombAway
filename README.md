@@ -1,2 +1,2 @@
-# BombAwey
+# BombAway
 offline Schulprojekt
