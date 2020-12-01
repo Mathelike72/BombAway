@@ -1,2 +1,0 @@
-# BombAway
-offline Schulprojekt
