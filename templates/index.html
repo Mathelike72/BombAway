@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Main Menu</title>
+    <meta charset="UTF-8">     
+    <link rel="stylesheet" href="{{url_for('menu_stylesheet', filename='style_menu.css')}}">
+</head>
+    <body>
+        <section class="menu">
+            <form class="play" method="POST" action="http://localhost:2020/play">
+                <p class="input"><input name="character" type="text" placeholder="Dropdown" maxlength="8"></p>
+                <p class="button"><input type="submit" value="Play!"></p>
+            </form>
+        </section>
+    </body>
+</html>

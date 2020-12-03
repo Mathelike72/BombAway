@@ -13,12 +13,11 @@ def menu():
 # Url to game & save character as session
 @app.route('/play', methods=['POST', 'GET'])
 def game():
-    return render_template('game.html') # While no index page
-    #if request.method == 'POST':
-        #session['character'] = request.form['character']
-        #return render_template('game.html', character=escape(session['character']))
-    #else:
-        #return redirect(url_for('menu'))
+    if request.method == 'POST':
+        session['character'] = request.form['character']
+        return render_template('game.html', character=escape(session['character']))
+    else:
+        return redirect(url_for('menu'))
 
 
 # Remove sessions and quit to title
@@ -28,7 +27,7 @@ def quit_game():
     return redirect(url_for(menu))
 
 
-# Route to favicon
+# Route to files
 @app.route('/favicon.ico')
 def fav():
     return send_from_directory(os.path.join(app.root_path, 'docs/img/favicon'), 'favicon.ico')
@@ -42,6 +41,11 @@ def game_script():
 @app.route('/style.css')
 def game_stylesheet():
     return send_from_directory(os.path.join(app.root_path, 'templates/css'), 'style.css')
+
+
+@app.route('/style_menu.css')
+def menu_stylesheet():
+    return send_from_directory(os.path.join(app.root_path, 'templates/css'), 'style_menu.css')
 
 
 # Secret Key (Must be kept secret)
