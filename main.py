@@ -1,3 +1,4 @@
+import werkzeug
 from flask import Flask, request, render_template, escape, session, redirect, url_for, send_from_directory
 import os
 
@@ -14,8 +15,14 @@ def menu():
 @app.route('/play', methods=['POST', 'GET'])
 def game():
     if request.method == 'POST':
-        session['character'] = request.form['character']
-        return render_template('game.html', character=escape(session['character']))
+        try:
+            session['player1'] = request.form['player[1]']
+            session['player2'] = request.form['player[2]']
+            return render_template('game.html', get_character_player1=escape(session['player1']),
+                                   get_character_player2=escape(session['player2']))
+        except werkzeug.exceptions.BadRequestKeyError:
+            error_message = "Each player has to select a character"
+            return redirect(url_for('menu'))
     else:
         return redirect(url_for('menu'))
 
@@ -23,8 +30,9 @@ def game():
 # Remove sessions and quit to title
 @app.route('/quit', methods=['POST', 'GET'])
 def quit_game():
-    session.pop('character', None)
-    return redirect(url_for(menu))
+    session.pop('player1', None)
+    session.pop('player2', None)
+    return redirect(url_for('menu'))
 
 
 # Route to files

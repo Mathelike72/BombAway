@@ -32,6 +32,9 @@ form{
     height: 40px;
     width: 250px;
 }
-.input input{
-    text-align: center;
+.player_1{
+    border: 1px solid white;
+}
+.player_2{
+    border: 1px solid white;
 }

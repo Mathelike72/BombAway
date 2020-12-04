@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Basic Bomberman HTML Game</title>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="{{url_for('game_stylesheet', filename='style.css')}}">
+    <title>Test_Suite</title>
+    <meta charset="UTF-8">     
 </head>
-  <body>
-    <canvas width="960" height="832" id="game"></canvas>
-    {{character}}
-    <script type=text/javascript src="{{url_for('game_script', filename='main.js')}}"></script>
-  </body>
+<body>
+    <h3>Player1:{{get_character_player1}}</h3>
+    <h3>Player2:{{get_character_player2}}</h3>
+    <form action="http://localhost:2020/quit" method="POST">
+        <p><input type="submit" value="Quit Game"></p> 
+    </form>
+</body>
 </html>
