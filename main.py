@@ -36,16 +36,21 @@ def quit_game():
 
 
 # Route to files
-@app.route('/favicon.ico')
+# Favicons
+@app.route('/favicon')
 def fav():
-    return send_from_directory(os.path.join(app.root_path, 'docs/img/favicon'), 'favicon.ico')
+    return send_from_directory(os.path.join(app.root_path, 'docs/img/favicon'), 'Bomb_1_small.png')
+# =============================================================================================
 
 
+# JavaScripts
 @app.route('/main.js')
 def game_script():
     return send_from_directory(os.path.join(app.root_path, 'templates/js'), 'main.js')
+# =============================================================================================
 
 
+# Stylesheets
 @app.route('/style.css')
 def game_stylesheet():
     return send_from_directory(os.path.join(app.root_path, 'templates/css'), 'style.css')
@@ -54,6 +59,24 @@ def game_stylesheet():
 @app.route('/style_menu.css')
 def menu_stylesheet():
     return send_from_directory(os.path.join(app.root_path, 'templates/css'), 'style_menu.css')
+# =============================================================================================
+
+
+# Characters
+@app.route('/image1')
+def image1():
+    return send_from_directory(os.path.join(app.root_path, 'docs/img/designs'), 'c1_test.png')
+
+
+@app.route('/image2')
+def image2():
+    return send_from_directory(os.path.join(app.root_path, 'docs/img/designs'), 'c2_test.png')
+
+
+@app.route('/image3')
+def image3():
+    return send_from_directory(os.path.join(app.root_path, 'docs/img/designs'), 'c3_test.png')
+# =============================================================================================
 
 
 # Secret Key (Must be kept secret)
@@ -67,8 +90,4 @@ if __name__ == '__main__':
 
 # Responsible Person: David Abderhalden
 # Repository: BombAway
-# Folder Structure:
-# main.py
-# templates -> HTML Files, (css -> Stylesheets), (js -> JavaScript Files)
-# docs -> (img -> (favicon -> favicon.ico), (designs -> Pixel Art Images .png)), (log -> Score Data As .txt)
 # Copyright ©

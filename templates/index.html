@@ -2,23 +2,45 @@
 <html>
 <head>
     <title>Main Menu</title>
-    <meta charset="UTF-8">     
+    <meta charset="UTF-8">
+    <link rel="icon" type="icon/favicon" href="{{url_for('fav', filename='Bomb_1_small')}}">
     <link rel="stylesheet" href="{{url_for('menu_stylesheet', filename='style_menu.css')}}">
 </head>
     <body>
         <section class="menu">
             <form class="play" method="POST" action="http://localhost:2020/play">
                 <div class="player_1">
-                    <input id="img1" name="player[1]" type="checkbox" value="character1">
-                    <input id="img2" name="player[1]" type="checkbox" value="character2">
-                    <input id="img3" name="player[1]" type="checkbox" value="character3">
+                    <p class="player">Characer Player 1</p>
+                    <label>
+                        <input id="img1" name="player[1]" type="radio" value="character1" checked>
+                        <img src="{{url_for('image1', filename='c1_test.png')}}">
+                    </label>
+                    <label>
+                        <input id="img2" name="player[1]" type="radio" value="character2">
+                        <img src="{{url_for('image2', filename='c2_test.png')}}">
+                    </label>
+                    <label>
+                        <input id="img3" name="player[1]" type="radio" value="character3">
+                         <img src="{{url_for('image3', filename='c3_test.png')}}">
+                    </label>
                 </div>
+                <input class="button" type="submit" value="Play!">
                 <div class="player_2">
-                    <input id="img1" name="player[2]" type="checkbox" value="character1">
-                    <input id="img2" name="player[2]" type="checkbox" value="character2">
-                    <input id="img3" name="player[2]" type="checkbox" value="character3">
+                    <p class="player">Characer Player 2</p>
+                    <label>
+                        <input id="img1" name="player[2]" type="radio" value="character1" checked>
+                        <img src="{{url_for('image1', filename='c1_test.png')}}">
+                    </label>
+                    <label>
+                        <input id="img2" name="player[2]" type="radio" value="character2">
+                        <img src="{{url_for('image2', filename='c2_test.png')}}">
+                    </label>
+                    <label>
+                        <input id="img3" name="player[2]" type="radio" value="character3">
+                        <img src="{{url_for('image3', filename='c3_test.png')}}">
+                    </label>
                 </div>
-                <p class="button"><input type="submit" value="Play!"></p>
+
             </form>
         </section>
     </body>
