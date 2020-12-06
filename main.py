@@ -18,8 +18,18 @@ def game():
         try:
             session['player1'] = request.form['player[1]']
             session['player2'] = request.form['player[2]']
-            return render_template('game.html', get_character_player1=escape(session['player1']),
-                                   get_character_player2=escape(session['player2']))
+            session['name1'] = request.form['name[1]']
+            session['name2'] = request.form['name[2]']
+            if session['name1'] and session['name2']:
+                return render_template('game.html',
+                                       get_character_player1=escape(session['player1']),
+                                       get_character_player2=escape(session['player2']),
+                                       get_name_player1=escape(session['name1']),
+                                       get_name_player2=escape(session['name2']),
+                                       )
+            else:
+                return redirect(url_for('menu'))
+
         except werkzeug.exceptions.BadRequestKeyError:
             error_message = "Each player has to select a character"
             return redirect(url_for('menu'))
