@@ -20,7 +20,10 @@ wallCtx.fillRect(2, 2, grid - 4, grid - 4);
 // create a mapping of object types
 const types = {
   wall: '▉',
+  softWall: "1"
 };
+
+let entities = [];
 
 let cells = [];
 const template = [
@@ -35,45 +38,60 @@ const template = [
   ['▉',   ,'▉',    ,'▉',    ,'▉',     ,'▉',     ,'▉',  ,'▉',   ,'▉'],
   ['▉',   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,          '▉'],
   ['▉',  ,'▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',    ,     '▉'],
-  ['▉',   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,      ,       '▉'],
+  ['▉',   ,  , '1' ,   ,   ,   ,   ,   ,   ,   ,   ,   ,      ,       '▉'],
   ['▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉']
 ];
 
-// For hard and soft walls
-function generateBlocks() {
+// populate the level with walls
+function generateLevel() {
   cells = [];
-
+ 
   for (let row = 0; row < numRows; row++) {
     cells[row] = [];
-
+ 
     for (let col = 0; col < numCols; col++) {
-
-      // 90% chance cells will contain a soft wall
-      if (!template[row][col] && Math.random() < 0.80) {
-        cells[row][col] = types.softWall;
-      }
-      else if (template[row][col] === types.wall) {
+ 
+ 
+      if (template[row][col] === types.wall) {
         cells[row][col] = types.wall;
       }
     }
   }
 }
-
-
-// loop for the game
+ 
+// player character (just a simple circle)
+const player = {
+  row: 11,
+  col: 1,
+  radius: grid * 0.5,
+  render() {
+    const x = (this.col + 0.5) * 64;
+    const y = (this.row + 0.5) * 64;
+ 
+    context.save();
+    context.fillStyle = 'red';
+    context.beginPath();
+    context.arc(x, y, this.radius, 0, 2 * Math.PI);
+    context.fill();
+  }
+}
+ 
+ 
+// game loop
 let last;
 let dt;
 function loop(timestamp) {
   requestAnimationFrame(loop);
   context.clearRect(0,0,canvas.width,canvas.height);
-
-  // passes the current timestamp as a parameter to the loop / Übergibt den aktuellen Zeitstempel als Parameter an die Schleife
+ 
+  // calculate the time difference since the last update. requestAnimationFrame
+  // passes the current timestamp as a parameter to the loop
   if (!last) {
     last = timestamp;
   }
   dt = timestamp - last;
   last = timestamp;
-
+ 
   // update and render everything in the grid
   for (let row = 0; row < numRows; row++) {
     for (let col = 0; col < numCols; col++) {
@@ -84,8 +102,52 @@ function loop(timestamp) {
       }
     }
   }
+ 
+ 
+  
+  // update and render all entities
+  entities.forEach((entity) => {
+    entity.update(dt);
+    entity.render();
+  });
+  // remove dead entities
+  entities = entities.filter((entity) => entity.alive);
+ 
+  player.render();
 }
-
+ 
+ 
+ 
+// listen to keyboard events to move the snake
+document.addEventListener('keydown', function(e) {
+  let row = player.row;
+  let col = player.col;
+ 
+  // left arrow key
+  if (e.which === 37) {
+    col--;
+  }
+  // up arrow key
+  else if (e.which === 38) {
+    row--;
+  }
+  // right arrow key
+  else if (e.which === 39) {
+    col++;
+  }
+  // down arrow key
+  else if (e.which === 40) {
+    row++;
+  }
+  // don't move the player if something is already at that position
+  if (!cells[row][col]) {
+    player.row = row;
+    player.col = col;
+  }
+});
+ 
+ 
+ 
 // start the game
-generateBlocks(); //generate the blocks
+generateLevel(); //Where the blocks spawn
 requestAnimationFrame(loop); //
