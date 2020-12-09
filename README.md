@@ -73,6 +73,6 @@ Wenn unsere Noten unter einer 5 sind, schreibt jeder von uns einen Aufsatz zum T
 
 Der Codex darf jeder Zeit angepasst, verändert und gelöscht werden. (Solange dieser Artikel noch nicht entfernt wurde)
 
-^*Artikel 16*^
+<sub><sup>*Artikel 16*<sub><sup>
 
-^Die Person, die diesen Codex geschrieben hat, hat ab jetzt alle Recht über das Projekt.^
+<sub><sup>Die Person, die diesen Codex geschrieben hat, hat ab jetzt alle Recht über das Projekt.<sub><sup>
