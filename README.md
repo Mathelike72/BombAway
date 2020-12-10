@@ -23,7 +23,7 @@ Alle Teammitglieder zeigen grossen Engagement und Interesse auf eine gute Arbeit
 
 *Artikel 3*
 
-Wenn jemand nicht weiter kommt, zögert er nicht auf die anderen zuzukommen und um Hilfe zu bitten.
+Wenn jemand nicht weiter kommt oder Fragen hat, zögert er nicht auf die anderen zuzukommen und um Hilfe zu bitten.
 
 *Artikel 4*
 
@@ -71,8 +71,8 @@ Wenn unsere Noten unter einer 5 sind, schreibt jeder von uns einen Aufsatz zum T
 
 *Artikel 15*
 
-Der Codex darf jeder Zeit angepasst, verändert und gelöscht werden. (Solange dieser Artikel noch nicht entfernt wurde)
+Der Codex darf jeder Zeit angepasst, verändert und gelöscht werden. Wenn alle einverstanden sind damit! (Solange dieser Artikel noch nicht entfernt wurde)
 
-<sub><sup>*Artikel 16*<sub><sup>
+*Artikel 16*
 
-<sub><sup>Die Person, die diesen Codex geschrieben hat, hat ab jetzt alle Recht über das Projekt.<sub><sup>
+Die Person, die diesen Codex geschrieben hat, muss sämtliche Rechtliche konsequenzen selbst tragen.
