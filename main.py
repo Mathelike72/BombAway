@@ -1,3 +1,4 @@
+import werkzeug
 from flask import Flask, request, render_template, escape, session, redirect, url_for, send_from_directory
 import os
 
@@ -13,35 +14,79 @@ def menu():
 # Url to game & save character as session
 @app.route('/play', methods=['POST', 'GET'])
 def game():
-    return render_template('game.html') # While no index page
-    #if request.method == 'POST':
-        #session['character'] = request.form['character']
-        #return render_template('game.html', character=escape(session['character']))
-    #else:
-        #return redirect(url_for('menu'))
+    if request.method == 'POST':
+        try:
+            session['player1'] = request.form['player[1]']
+            session['player2'] = request.form['player[2]']
+            session['name1'] = request.form['name[1]']
+            session['name2'] = request.form['name[2]']
+            if session['name1'] and session['name2']:
+                return render_template('game.html',
+                                       get_character_player1=escape(session['player1']),
+                                       get_character_player2=escape(session['player2']),
+                                       get_name_player1=escape(session['name1']),
+                                       get_name_player2=escape(session['name2']),
+                                       )
+            else:
+                return redirect(url_for('menu'))
+
+        except werkzeug.exceptions.BadRequestKeyError:
+            error_message = "Each player has to select a character"
+            return redirect(url_for('menu'))
+    else:
+        return redirect(url_for('menu'))
 
 
 # Remove sessions and quit to title
 @app.route('/quit', methods=['POST', 'GET'])
 def quit_game():
-    session.pop('character', None)
-    return redirect(url_for(menu))
+    session.pop('player1', None)
+    session.pop('player2', None)
+    return redirect(url_for('menu'))
 
 
-# Route to favicon
-@app.route('/favicon.ico')
+# Route to files
+# Favicons
+@app.route('/favicon')
 def fav():
-    return send_from_directory(os.path.join(app.root_path, 'docs/img/favicon'), 'favicon.ico')
+    return send_from_directory(os.path.join(app.root_path, 'docs/img/favicon'), 'Bomb_1_small.png')
+# =============================================================================================
 
 
+# JavaScripts
 @app.route('/main.js')
 def game_script():
     return send_from_directory(os.path.join(app.root_path, 'templates/js'), 'main.js')
+# =============================================================================================
 
 
+# Stylesheets
 @app.route('/style.css')
 def game_stylesheet():
     return send_from_directory(os.path.join(app.root_path, 'templates/css'), 'style.css')
+
+
+@app.route('/style_menu.css')
+def menu_stylesheet():
+    return send_from_directory(os.path.join(app.root_path, 'templates/css'), 'style_menu.css')
+# =============================================================================================
+
+
+# Characters
+@app.route('/image1')
+def image1():
+    return send_from_directory(os.path.join(app.root_path, 'docs/img/designs'), 'c1_test.png')
+
+
+@app.route('/image2')
+def image2():
+    return send_from_directory(os.path.join(app.root_path, 'docs/img/designs'), 'c2_test.png')
+
+
+@app.route('/image3')
+def image3():
+    return send_from_directory(os.path.join(app.root_path, 'docs/img/designs'), 'c3_test.png')
+# =============================================================================================
 
 
 # Secret Key (Must be kept secret)
@@ -55,8 +100,4 @@ if __name__ == '__main__':
 
 # Responsible Person: David Abderhalden
 # Repository: BombAway
-# Folder Structure:
-# main.py
-# templates -> HTML Files, (css -> Stylesheets), (js -> JavaScript Files)
-# docs -> (img -> (favicon -> favicon.ico), (designs -> Pixel Art Images .png)), (log -> Score Data As .txt)
 # Copyright ©
