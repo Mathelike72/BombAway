@@ -45,20 +45,19 @@ const template = [
 // populate the level with walls
 function generateLevel() {
   cells = [];
- 
+
   for (let row = 0; row < numRows; row++) {
     cells[row] = [];
- 
+
     for (let col = 0; col < numCols; col++) {
- 
- 
+
       if (template[row][col] === types.wall) {
         cells[row][col] = types.wall;
       }
     }
   }
 }
- 
+
 // player character (just a simple circle)
 const player = {
   row: 11,
@@ -67,7 +66,7 @@ const player = {
   render() {
     const x = (this.col + 0.5) * 64;
     const y = (this.row + 0.5) * 64;
- 
+
     context.save();
     context.fillStyle = 'red';
     context.beginPath();
@@ -75,15 +74,15 @@ const player = {
     context.fill();
   }
 }
- 
- 
+
+
 // game loop
 let last;
 let dt;
 function loop(timestamp) {
   requestAnimationFrame(loop);
   context.clearRect(0,0,canvas.width,canvas.height);
- 
+
   // calculate the time difference since the last update. requestAnimationFrame
   // passes the current timestamp as a parameter to the loop
   if (!last) {
@@ -91,7 +90,7 @@ function loop(timestamp) {
   }
   dt = timestamp - last;
   last = timestamp;
- 
+
   // update and render everything in the grid
   for (let row = 0; row < numRows; row++) {
     for (let col = 0; col < numCols; col++) {
@@ -102,8 +101,8 @@ function loop(timestamp) {
       }
     }
   }
- 
- 
+
+
   
   // update and render all entities
   entities.forEach((entity) => {
@@ -112,17 +111,17 @@ function loop(timestamp) {
   });
   // remove dead entities
   entities = entities.filter((entity) => entity.alive);
- 
+
   player.render();
 }
- 
- 
- 
+
+
+
 // listen to keyboard events to move the snake
 document.addEventListener('keydown', function(e) {
   let row = player.row;
   let col = player.col;
- 
+
   // left arrow key
   if (e.which === 37) {
     col--;
@@ -145,9 +144,9 @@ document.addEventListener('keydown', function(e) {
     player.col = col;
   }
 });
- 
- 
- 
+
+
+
 // start the game
 generateLevel(); //Where the blocks spawn
 requestAnimationFrame(loop); //
