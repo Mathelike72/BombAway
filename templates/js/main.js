@@ -17,11 +17,11 @@ const swallCanvas = document.createElement('canvas');
 const swall = swallCanvas.getContext('2d');
 var img2 = document.getElementById('softWall');
 swallCanvas.width = swallCanvas.height = grid;
-swall.drawImage(img2, 0, 0);
+swall.drawImage(img2, 0, 0); 
 
 const types = {
   wall: '▉',
-  swall: '▢',
+  swall: 1,
 };
 
 let entities = [];
@@ -29,17 +29,17 @@ let entities = [];
 let cells = [];
 const template = [
   ['▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉'],
-  ['▉','▢','▢',    ,    ,    ,    ,    ,    ,    ,    ,    ,   ,  ,'▉'],
-  ['▉',    ,'▉',     ,'▉',    ,'▉',    ,'▉',   ,'▉',    ,'▉',  ,'▉'],
-  ['▉',  ,   ,   ,   ,   ,    ,    ,    ,    ,     ,     ,   ,   ,   '▉'],
+  ['▉','x', 'x'  ,   ,    ,    ,    ,    ,    ,    ,    ,    ,   ,  ,'▉'],
+  ['▉','x' ,'▉',     ,'▉',    ,'▉',    ,'▉',   ,'▉',    ,'▉',  ,'▉'],
+  ['▉','x' ,   ,   ,   ,   ,    ,    ,    ,    ,     ,     ,   ,   , '▉'],
   ['▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',   ,     '▉'],
   ['▉',   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,          '▉'],
   ['▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',  ,      '▉'],
   ['▉',   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,          '▉'],
   ['▉',   ,'▉',    ,'▉',    ,'▉',     ,'▉',     ,'▉',  ,'▉',   ,'▉'],
-  ['▉',   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,          '▉'],
-  ['▉',  ,'▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',    ,     '▉'],
-  ['▉',   ,  ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,      ,       '▉'],
+  ['▉','x',   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,          '▉'],
+  ['▉','x','▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',    ,    '▉'],
+  ['▉','x' ,'x',   ,    ,   ,   ,   ,   ,   ,   ,   ,   ,      ,     '▉'],
   ['▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉']
 ];
 
@@ -52,7 +52,11 @@ function generateLevel() {
 
     for (let col = 0; col < numCols; col++) {
 
-      if (template[row][col] === types.wall) {
+      // 70% chance cells turn soft wall
+      if (!template[row][col] && Math.random() < 0.70) {
+        cells[row][col] = types.swall;
+      }
+      else if (template[row][col] === types.wall) {
         cells[row][col] = types.wall;
       }
     }
@@ -69,7 +73,7 @@ const player = {
     const y = (this.row + 0.5) * 64;
 
     context.save();
-    context.fillStyle = 'red';
+    context.fillStyle = 'white';
     context.beginPath();
     context.arc(x, y, this.radius, 0, 2 * Math.PI);
     context.fill();
@@ -99,6 +103,9 @@ function loop(timestamp) {
         case types.wall:
           context.drawImage(wallCanvas, col * grid, row * grid);
           break;
+          case types.swall:
+            context.drawImage(swallCanvas, col * grid, row * grid);
+            break;
       }
     }
   }
