@@ -44,6 +44,15 @@ def game_stylesheet():
     return send_from_directory(os.path.join(app.root_path, 'templates/css'), 'style.css')
 
 
+@app.route('/hardWall')
+def hard_wall():
+    return send_from_directory(os.path.join(app.root_path, 'docs/img/designs'), 'hardWall.png')
+
+@app.route('/softWall')
+def soft_wall():
+    return send_from_directory(os.path.join(app.root_path, 'docs/img/designs'), 'softWall.png')
+
+
 # Secret Key (Must be kept secret)
 app.secret_key = "\xec\x82\x16E\xb0\xe9\xec3\xccG\xe7\xd4&b\x92\t\x13\xce(\x8a\x80\xa0\xe9x"
 

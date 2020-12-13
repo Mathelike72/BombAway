@@ -3,24 +3,25 @@ const context = canvas.getContext('2d');
 const grid = 64;
 const numRows = 13;
 const numCols = 15;
-const softWallCanvas = document.createElement('canvas');
+//const softWallCanvas = document.createElement('canvas');
 
-// canvas for ubrakable bricks
+// canvas for unbrakable bricks
 const wallCanvas = document.createElement('canvas');
-const wallCtx = wallCanvas.getContext('2d');
+const wall = wallCanvas.getContext('2d');
+var img1 = document.getElementById('hardWall');
 wallCanvas.width = wallCanvas.height = grid;
+wall.drawImage(img1, 0, 0);
 
-wallCtx.fillStyle = 'black';
-wallCtx.fillRect(0, 0, grid, grid);
-wallCtx.fillStyle = 'white';
-wallCtx.fillRect(0, 0, grid -2, grid - 2);
-wallCtx.fillStyle = 'gray';
-wallCtx.fillRect(2, 2, grid - 4, grid - 4);
+// canvas for brakable bricks
+const swallCanvas = document.createElement('canvas');
+const swall = swallCanvas.getContext('2d');
+var img2 = document.getElementById('softWall');
+swallCanvas.width = swallCanvas.height = grid;
+swall.drawImage(img2, 0, 0);
 
-// create a mapping of object types
 const types = {
   wall: '▉',
-
+  swall: '▢',
 };
 
 let entities = [];
@@ -28,7 +29,7 @@ let entities = [];
 let cells = [];
 const template = [
   ['▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉'],
-  ['▉',    ,    ,    ,    ,    ,    ,    ,    ,    ,    ,    ,   ,  ,'▉'],
+  ['▉','▢','▢',    ,    ,    ,    ,    ,    ,    ,    ,    ,   ,  ,'▉'],
   ['▉',    ,'▉',     ,'▉',    ,'▉',    ,'▉',   ,'▉',    ,'▉',  ,'▉'],
   ['▉',  ,   ,   ,   ,   ,    ,    ,    ,    ,     ,     ,   ,   ,   '▉'],
   ['▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',   ,     '▉'],

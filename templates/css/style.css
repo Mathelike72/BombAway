@@ -12,3 +12,11 @@ body {
 canvas {
     background: rgb(5, 71, 10);
 }
+
+#hardWall {
+    display: none;
+}
+
+#softWall{
+    display: none;
+}

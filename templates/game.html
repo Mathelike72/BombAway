@@ -4,9 +4,16 @@
   <title>Basic Bomberman HTML Game</title>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="{{url_for('game_stylesheet', filename='style.css')}}">
+  
 </head>
   <body>
     <canvas width="960" height="832" id="game"></canvas>
+    <img src="{{url_for('hard_wall', filename='hardWall.png')}}" id="hardWall"/>
+    <img src="{{url_for('soft_wall', filename='softWall.png')}}" id="softWall"/>
     <script type=text/javascript src="{{url_for('game_script', filename='main.js')}}"></script>
   </body>
 </html>
+
+<!--"{{url_for('hard_wall', filename='hardWall.png')}}"-->
+<!--"{{url_for('game_script', filename='main.js')}}"-->
+<!--"{{url_for('game_stylesheet', filename='style.css')}}"-->
