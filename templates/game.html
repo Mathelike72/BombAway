@@ -7,7 +7,10 @@
   
 </head>
   <body>
-    <canvas width="960" height="832" id="game"></canvas>
+    
+    <canvas width="960px" height="832px" id="game">
+      <img src="{{url_for('background', filename='background.png')}}" id="background"/>
+    </canvas>
     <img src="{{url_for('hard_wall', filename='hardWall.png')}}" id="hardWall"/>
     <img src="{{url_for('soft_wall', filename='softWall.png')}}" id="softWall"/>
     <script type=text/javascript src="{{url_for('game_script', filename='main.js')}}"></script>

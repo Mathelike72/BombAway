@@ -3,6 +3,7 @@ const context = canvas.getContext('2d');
 const grid = 64;
 const numRows = 13;
 const numCols = 15;
+var imgb = document.getElementById('background');
 //const softWallCanvas = document.createElement('canvas');
 
 // canvas for unbrakable bricks

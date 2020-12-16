@@ -10,7 +10,13 @@ body {
     box-shadow: 0 0 5rem;
 }
 canvas {
-    background: rgb(5, 71, 10);
+    background-color: green;
+    background-image: url("{{url_for('background', filename='background.png')}}");
+}
+
+#game {
+    background-image: url("{{url_for('background', filename='background.png')}}");
+    background-size: cover;
 }
 
 #hardWall {
