@@ -10,7 +10,6 @@ body {
     box-shadow: 0 0 5rem;
 }
 canvas {
-    background-color: green;
     background-image: url("{{url_for('background', filename='background.png')}}");
 }
 

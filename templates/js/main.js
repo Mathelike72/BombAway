@@ -40,7 +40,23 @@ const template = [
   ['▉',   ,'▉',    ,'▉',    ,'▉',     ,'▉',     ,'▉',  ,'▉',   ,'▉'],
   ['▉','x',   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,          '▉'],
   ['▉','x','▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',    ,    '▉'],
-  ['▉','x' ,'x',   ,    ,   ,   ,   ,   ,   ,   ,   ,   ,      ,     '▉'],
+  ['▉','x' ,'x', 'x',    ,   ,   ,   ,   ,   ,   ,   ,   ,      ,     '▉'],
+  ['▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉']
+];
+
+const template2 = [
+  ['▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉'],
+  ['▉','x', 'x'  ,   ,    ,    ,    ,    ,    ,    ,    ,    ,   ,  ,'▉'],
+  ['▉','x' ,'▉',     ,'▉',    ,'▉',    ,'▉',   ,'▉',    ,'▉',  ,'▉'],
+  ['▉','x' ,   ,   ,   ,   ,    ,    ,    ,    ,     ,     ,   ,   , '▉'],
+  ['▉',  ,'▉',  ,'▉',   ,'▉',  'x'  ,'▉',    ,'▉',  ,'▉',    ,     '▉'],
+  ['▉',   ,   ,   ,   ,   ,   ,   ,  'x' ,   ,   ,   ,   ,   ,          '▉'],
+  ['▉',   ,'▉',   ,'▉',   ,'▉',  'x' ,'▉',   ,'▉',   ,'▉',  ,      '▉'],
+  ['▉',   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,          '▉'],
+  ['▉',   ,'▉',    ,'▉',    ,'▉',     ,'▉',     ,'▉',  ,'▉',   ,'▉'],
+  ['▉','x',   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,          '▉'],
+  ['▉','x','▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',    ,    '▉'],
+  ['▉','x' ,'x', 'x',    ,   ,   ,   ,   ,   ,   ,   ,   ,      ,     '▉'],
   ['▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉']
 ];
 
@@ -58,6 +74,26 @@ function generateLevel() {
         cells[row][col] = types.swall;
       }
       else if (template[row][col] === types.wall) {
+        cells[row][col] = types.wall;
+      }
+    }
+  }
+}
+
+// background Engine for PowerUp and other stuff
+function generateLevelback() {
+  cells = [];
+
+  for (let row = 0; row < numRows; row++) {
+    cells[row] = [];
+
+    for (let col = 0; col < numCols; col++) {
+
+      // 70% chance cells turn soft wall
+      if (!template2[row][col] && Math.random() < 0.70) {
+        cells[row][col] = types.swall;
+      }
+      else if (template2[row][col] === types.wall) {
         cells[row][col] = types.wall;
       }
     }
@@ -158,4 +194,5 @@ document.addEventListener('keydown', function(e) {
 
 // start the game
 generateLevel(); //Where the blocks spawn
+generateLevelback() //background arbeit
 requestAnimationFrame(loop); //
