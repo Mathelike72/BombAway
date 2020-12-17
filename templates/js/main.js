@@ -6,21 +6,21 @@ const numCols = 15;
 //var imgb = document.getElementById('background');
 //const softWallCanvas = document.createElement('canvas');
 
-// canvas for unbrakable bricks
+// canvas for unbreakable bricks
 const wallCanvas = document.createElement('canvas');
 const wall = wallCanvas.getContext('2d');
 var img1 = document.getElementById('hardWall');
 wallCanvas.width = wallCanvas.height = grid;
 wall.drawImage(img1, 0, 0);
 
-// canvas for brakable bricks
+// canvas for breakable bricks
 const swallCanvas = document.createElement('canvas');
 const swall = swallCanvas.getContext('2d');
 var img2 = document.getElementById('softWall');
 swallCanvas.width = swallCanvas.height = grid;
 swall.drawImage(img2, 0, 0); 
 
-// canvas for brakable bricks
+// canvas for power-up
 const powerUpCanvas = document.createElement('canvas');
 const powerUp = swallCanvas.getContext('2d');
 var img3 = document.getElementById('powerUp');
@@ -199,7 +199,7 @@ document.addEventListener('keydown', function(e) {
     bombe ();
   }
   // don't move the player if something is already at that position
-  if (!cells[row][col]) {
+  if (!template.cells[row][col]) {
     player.row = row;
     player.col = col;
   }
