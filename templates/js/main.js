@@ -1,3 +1,5 @@
+setTimeout(function(){
+
 const canvas = document.getElementById('game'); //Where the game is being displayed
 const context = canvas.getContext('2d');
 const grid = 64;
@@ -211,3 +213,4 @@ document.addEventListener('keydown', function(e) {
 generateLevel(); //Where the blocks spawn
 generateLevelback() //background arbeit
 requestAnimationFrame(loop); //
+}, 5);
