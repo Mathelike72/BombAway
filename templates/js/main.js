@@ -3,7 +3,7 @@ const context = canvas.getContext('2d');
 const grid = 64;
 const numRows = 13;
 const numCols = 15;
-var imgb = document.getElementById('background');
+//var imgb = document.getElementById('background');
 //const softWallCanvas = document.createElement('canvas');
 
 // canvas for unbrakable bricks
@@ -20,9 +20,18 @@ var img2 = document.getElementById('softWall');
 swallCanvas.width = swallCanvas.height = grid;
 swall.drawImage(img2, 0, 0); 
 
+// canvas for brakable bricks
+const powerUpCanvas = document.createElement('canvas');
+const powerUp = swallCanvas.getContext('2d');
+var img3 = document.getElementById('powerUp');
+powerUpCanvas.width = powerUpCanvas.height = grid;
+powerUp.drawImage(img3, 0, 0); 
+
+
 const types = {
   wall: '▉',
   swall: 1,
+  powerUP: 2,
 };
 
 let entities = [];
@@ -49,9 +58,9 @@ const template2 = [
   ['▉','x', 'x'  ,   ,    ,    ,    ,    ,    ,    ,    ,    ,   ,  ,'▉'],
   ['▉','x' ,'▉',     ,'▉',    ,'▉',    ,'▉',   ,'▉',    ,'▉',  ,'▉'],
   ['▉','x' ,   ,   ,   ,   ,    ,    ,    ,    ,     ,     ,   ,   , '▉'],
-  ['▉',  ,'▉',  ,'▉',   ,'▉',  'x'  ,'▉',    ,'▉',  ,'▉',    ,     '▉'],
-  ['▉',   ,   ,   ,   ,   ,   ,   ,  'x' ,   ,   ,   ,   ,   ,          '▉'],
-  ['▉',   ,'▉',   ,'▉',   ,'▉',  'x' ,'▉',   ,'▉',   ,'▉',  ,      '▉'],
+  ['▉',  ,'▉',  ,'▉',   ,'▉',    ,'▉',    ,'▉',  ,'▉',    ,     '▉'],
+  ['▉',   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,          '▉'],
+  ['▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',  ,      '▉'],
   ['▉',   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,          '▉'],
   ['▉',   ,'▉',    ,'▉',    ,'▉',     ,'▉',     ,'▉',  ,'▉',   ,'▉'],
   ['▉','x',   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,          '▉'],
@@ -62,19 +71,19 @@ const template2 = [
 
 // populate the level with walls
 function generateLevel() {
-  cells = [];
+  template.cells = [];
 
   for (let row = 0; row < numRows; row++) {
-    cells[row] = [];
+    template.cells[row] = [];
 
     for (let col = 0; col < numCols; col++) {
 
       // 70% chance cells turn soft wall
       if (!template[row][col] && Math.random() < 0.70) {
-        cells[row][col] = types.swall;
+        template.cells[row][col] = types.swall;
       }
       else if (template[row][col] === types.wall) {
-        cells[row][col] = types.wall;
+        template.cells[row][col] = types.wall;
       }
     }
   }
@@ -82,19 +91,16 @@ function generateLevel() {
 
 // background Engine for PowerUp and other stuff
 function generateLevelback() {
-  cells = [];
+  template2.cells = [];
 
   for (let row = 0; row < numRows; row++) {
-    cells[row] = [];
+    template2.cells[row] = [];
 
     for (let col = 0; col < numCols; col++) {
 
-      // 70% chance cells turn soft wall
-      if (!template2[row][col] && Math.random() < 0.70) {
-        cells[row][col] = types.swall;
-      }
-      else if (template2[row][col] === types.wall) {
-        cells[row][col] = types.wall;
+      // 20% chance cells turn out Upgrade
+      if (!template[row][col] === types.swall && Math.random() < 0.0) {
+        tamplate2.cells[row][col] = types.powerUp;
       }
     }
   }
@@ -117,6 +123,11 @@ const player = {
   }
 }
 
+// Bomb placing (just simple circle)
+const bomb = {
+
+}
+
 
 // game loop
 let last;
@@ -136,7 +147,7 @@ function loop(timestamp) {
   // update and render everything in the grid
   for (let row = 0; row < numRows; row++) {
     for (let col = 0; col < numCols; col++) {
-      switch(cells[row][col]) {
+      switch(template.cells[row][col]) {
         case types.wall:
           context.drawImage(wallCanvas, col * grid, row * grid);
           break;
@@ -182,6 +193,10 @@ document.addEventListener('keydown', function(e) {
   // down arrow key
   else if (e.which === 40) {
     row++;
+  }
+  // placing bomb
+  else if (e.which === 32){
+    bombe ();
   }
   // don't move the player if something is already at that position
   if (!cells[row][col]) {

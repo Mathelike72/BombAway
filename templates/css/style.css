@@ -10,13 +10,13 @@ body {
     box-shadow: 0 0 5rem;
 }
 canvas {
-    background-image: url("{{url_for('background', filename='background.png')}}");
+    background-color: green;
 }
 
-#game {
+/*#game {
     background-image: url("{{url_for('background', filename='background.png')}}");
     background-size: cover;
-}
+}*/
 
 #hardWall {
     display: none;

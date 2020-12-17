@@ -56,6 +56,10 @@ def soft_wall():
 def background():
     return send_from_directory(os.path.join(app.root_path, 'docs/img/designs'), 'background.png')
 
+@app.route('/upGrade1')
+def up_Grade1():
+    return send_from_directory(os.path.join(app.root_path, 'docs/img/designs'), 'upGrade1.png')
+
 
 # Secret Key (Must be kept secret)
 app.secret_key = "\xec\x82\x16E\xb0\xe9\xec3\xccG\xe7\xd4&b\x92\t\x13\xce(\x8a\x80\xa0\xe9x"
