@@ -41,33 +41,33 @@ let entities = [];
 let cells = [];
 const template = [
   ['▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉'],
-  ['▉','x', 'x'  ,   ,    ,    ,    ,    ,    ,    ,    ,    ,   ,  ,'▉'],
-  ['▉','x' ,'▉',     ,'▉',    ,'▉',    ,'▉',   ,'▉',    ,'▉',  ,'▉'],
-  ['▉','x' ,   ,   ,   ,   ,    ,    ,    ,    ,     ,     ,   ,   , '▉'],
-  ['▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',   ,     '▉'],
-  ['▉',   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,          '▉'],
-  ['▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',  ,      '▉'],
-  ['▉',   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,          '▉'],
-  ['▉',   ,'▉',    ,'▉',    ,'▉',     ,'▉',     ,'▉',  ,'▉',   ,'▉'],
-  ['▉','x',   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,          '▉'],
-  ['▉','x','▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',    ,    '▉'],
-  ['▉','x' ,'x', 'x',    ,   ,   ,   ,   ,   ,   ,   ,   ,      ,     '▉'],
+  ['▉','x', 'x'  ,   ,    ,    ,    ,    ,    ,    ,    ,  , 'x' ,'x','▉'],
+  ['▉','x' ,'▉',     ,'▉',    ,'▉',    ,'▉',   ,'▉',    ,'▉','x','▉'],
+  ['▉','x' ,   ,   ,   ,   ,    ,    ,    ,    ,      ,     ,    ,'x','▉'],
+  ['▉',   ,'▉',   ,'▉',   ,'▉',    ,'▉',   ,'▉',   ,'▉',    ,    '▉'],
+  ['▉',   ,   ,   ,   ,   ,    ,   ,   ,   ,   ,   ,   ,   ,          '▉'],
+  ['▉',   ,'▉',   ,'▉',   ,'▉',    ,'▉',   ,'▉',   ,'▉',  ,      '▉'],
+  ['▉',   ,   ,   ,   ,   ,   ,    ,   ,   ,   ,   ,   ,   ,          '▉'],
+  ['▉',   ,'▉',    ,'▉',    ,'▉',      ,'▉',     ,'▉',  ,'▉',   ,'▉'],
+  ['▉','x',   ,   ,   ,   ,   ,   ,    ,   ,      ,     ,        ,'x','▉'],
+  ['▉','x','▉',   ,'▉',  ,'▉',     ,'▉',      ,'▉',     ,'▉','x','▉'],
+  ['▉','x' ,'x', 'x',      ,     ,    ,    ,   ,   ,    ,    ,'x','x','▉'],
   ['▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉']
 ];
 
 const template2 = [
   ['▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉'],
-  ['▉','x', 'x'  ,   ,    ,    ,    ,    ,    ,    ,    ,    ,   ,  ,'▉'],
-  ['▉','x' ,'▉',     ,'▉',    ,'▉',    ,'▉',   ,'▉',    ,'▉',  ,'▉'],
-  ['▉','x' ,   ,   ,   ,   ,    ,    ,    ,    ,     ,     ,   ,   , '▉'],
-  ['▉',  ,'▉',  ,'▉',   ,'▉',    ,'▉',    ,'▉',  ,'▉',    ,     '▉'],
-  ['▉',   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,          '▉'],
-  ['▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',  ,      '▉'],
-  ['▉',   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,          '▉'],
-  ['▉',   ,'▉',    ,'▉',    ,'▉',     ,'▉',     ,'▉',  ,'▉',   ,'▉'],
-  ['▉','x',   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,          '▉'],
-  ['▉','x','▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',    ,    '▉'],
-  ['▉','x' ,'x', 'x',    ,   ,   ,   ,   ,   ,   ,   ,   ,      ,     '▉'],
+  ['▉','x', 'x'  ,   ,    ,    ,    ,    ,    ,    ,    ,  , 'x' ,'x','▉'],
+  ['▉','x' ,'▉',     ,'▉',    ,'▉',    ,'▉',   ,'▉',    ,'▉','x','▉'],
+  ['▉','x' ,   ,   ,   ,   ,    ,    ,    ,    ,      ,     ,    ,'x','▉'],
+  ['▉',   ,'▉',   ,'▉',   ,'▉',    ,'▉',   ,'▉',   ,'▉',    ,    '▉'],
+  ['▉',   ,   ,   ,   ,   ,    ,   ,   ,   ,   ,   ,   ,   ,          '▉'],
+  ['▉',   ,'▉',   ,'▉',   ,'▉',    ,'▉',   ,'▉',   ,'▉',  ,      '▉'],
+  ['▉',   ,   ,   ,   ,   ,   ,    ,   ,   ,   ,   ,   ,   ,          '▉'],
+  ['▉',   ,'▉',    ,'▉',    ,'▉',      ,'▉',     ,'▉',  ,'▉',   ,'▉'],
+  ['▉','x',   ,   ,   ,   ,   ,   ,    ,   ,      ,     ,        ,'x','▉'],
+  ['▉','x','▉',   ,'▉',  ,'▉',     ,'▉',      ,'▉',     ,'▉','x','▉'],
+  ['▉','x' ,'x', 'x',      ,     ,    ,    ,   ,   ,    ,    ,'x','x','▉'],
   ['▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉']
 ];
 
@@ -101,7 +101,7 @@ function generateLevelback() {
     for (let col = 0; col < numCols; col++) {
 
       // 20% chance cells turn out Upgrade
-      if (!template[row][col] === types.swall && Math.random() < 0.0) {
+      if (!template[row][col] === types.swall && Math.random() < 0.2) {
         tamplate2.cells[row][col] = types.powerUp;
       }
     }
@@ -112,7 +112,7 @@ function generateLevelback() {
 const player = {
   row: 11,
   col: 1,
-  radius: grid * 0.5,
+  radius: grid * 0.4,
   render() {
     const x = (this.col + 0.5) * 64;
     const y = (this.row + 0.5) * 64;
@@ -124,6 +124,23 @@ const player = {
     context.fill();
   }
 }
+// player character (just a simple circle)
+const player2 = {
+  row: 1,
+  col: 13,
+  radius: grid * 0.4,
+  render() {
+    const x = (this.col + 0.5) * 64;
+    const y = (this.row + 0.5) * 64;
+
+    context.save();
+    context.fillStyle = 'white';
+    context.beginPath();
+    context.arc(x, y, this.radius, 0, 2 * Math.PI);
+    context.fill();
+  }
+}
+
 
 // Bomb placing (just simple circle)
 const bomb = {
@@ -161,7 +178,6 @@ function loop(timestamp) {
   }
 
 
-  
   // update and render all entities
   entities.forEach((entity) => {
     entity.update(dt);
@@ -171,11 +187,12 @@ function loop(timestamp) {
   entities = entities.filter((entity) => entity.alive);
 
   player.render();
+  player2.render();
 }
 
 
 
-// listen to keyboard events to move the snake
+// listen to keyboard events to move the player
 document.addEventListener('keydown', function(e) {
   let row = player.row;
   let col = player.col;
@@ -207,6 +224,37 @@ document.addEventListener('keydown', function(e) {
   }
 });
 
+// listen to keyboard events to move the player
+document.addEventListener('keydown', function(e) {
+  let row = player2.row;
+  let col = player2.col;
+
+  // left arrow key
+  if (e.which === 65) {
+    col--;
+  }
+  // up arrow key
+  else if (e.which === 87) {
+    row--;
+  }
+  // right arrow key
+  else if (e.which === 68) {
+    col++;
+  }
+  // down arrow key
+  else if (e.which === 83) {
+    row++;
+  }
+  // placing bomb
+  else if (e.which === 32){
+    bombe ();
+  }
+  // don't move the player if something is already at that position
+  if (!template.cells[row][col]) {
+    player2.row = row;
+    player2.col = col;
+  }
+});
 
 
 // start the game

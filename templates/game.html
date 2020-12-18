@@ -7,9 +7,8 @@
   
 </head>
   <body>
-    <canvas width="960px" height="832px" id="game">
-      <!--<img src="{{url_for('background', filename='background.png')}}" id="background"/>-->
-    </canvas>
+    <canvas width="960px" height="832px" id="game"></canvas>
+    <img src="{{url_for('background', filename='background.png')}}" id="background"/>
     <img src="{{url_for('hard_wall', filename='hardWall.png')}}" id="hardWall"/>
     <img src="{{url_for('soft_wall', filename='softWall.png')}}" id="softWall"/>
     <img src="{{url_for('up_Grade1', filename='upGrade1.png')}}" id="powerUp"/>
