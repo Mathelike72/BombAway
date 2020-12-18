@@ -22,11 +22,11 @@ def game():
             session['name2'] = request.form['name[2]']
             if session['name1'] and session['name2']:
                 return render_template('game.html',
-                                       get_character_player1=escape(session['player1']),
-                                       get_character_player2=escape(session['player2']),
-                                       get_name_player1=escape(session['name1']),
-                                       get_name_player2=escape(session['name2']),
-                                       )
+                                    get_character_player1=escape(session['player1']),
+                                    get_character_player2=escape(session['player2']),
+                                    get_name_player1=escape(session['name1']),
+                                    get_name_player2=escape(session['name2']),
+                                    )
             else:
                 return redirect(url_for('menu'))
 
