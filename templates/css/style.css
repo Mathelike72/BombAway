@@ -25,3 +25,7 @@ canvas {
 #softWall{
     display: none;
 }
+
+#powerUp{
+    display: none;
+}
