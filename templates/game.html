@@ -8,15 +8,13 @@
 </head>
   <body>
 
-    <canvas id="one" width="960px" height="832px">
-      <img src="{{url_for('background', filename='background.png')}}" id="background"/>
-      <img src="{{url_for('hard_wall', filename='hardWall.png')}}" id="hardWall"/>
-      <img src="{{url_for('soft_wall', filename='softWall.png')}}" id="softWall"/>
-    </canvas>
-
-    <canvas id="two" width="960px" height="832px">
-      <img src="{{url_for('up_grade', filename='upGrade1.png')}}" id="powerUp"/>
-    </canvas>
+    <canvas id="game" width="960px" height="832px"></canvas>
+    
+    <img src="{{url_for('background', filename='background.png')}}" id="background"/>
+    <img src="{{url_for('hard_wall', filename='hardWall.png')}}" id="hardWall"/>
+    <img src="{{url_for('soft_wall', filename='softWall.png')}}" id="softWall"/>
+    <img src="{{url_for('up_grade', filename='upGrade1.png')}}" id="powerUp"/>
+    
 
     <script type=text/javascript src="{{url_for('game_script', filename='main.js')}}"></script>
   </body>

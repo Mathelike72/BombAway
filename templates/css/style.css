@@ -9,16 +9,8 @@ body {
     align-items: center;
     justify-content: center;
     box-shadow: 0 0 5rem;
-    position: relative;
 }
-#one {
-    position: absolute;
-    left: 25%;
-    z-index: 1;
-}
-
-#two{
-    z-index: -1;
+#game {
 }
 
 canvas{
@@ -28,7 +20,7 @@ canvas{
 #background {
     position: absolute;
     margin: 0 auto;
-    z-index: -2;
+    z-index: -1;
 
 }
 #hardWall {
