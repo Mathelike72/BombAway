@@ -8,9 +8,16 @@ body {
     align-items: center;
     justify-content: center;
     box-shadow: 0 0 5rem;
+    position: relative;
 }
-canvas {
-    background-color: green;
+#one {
+    position: absolute;
+    left: 25%;
+    z-index: 1;
+}
+
+#two{
+    z-index: -1;
 }
 
 /*#game {
