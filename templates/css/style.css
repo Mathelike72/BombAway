@@ -1,6 +1,7 @@
 html, body {
     height: 100%;
     margin: 0;
+    box-sizing: border-box;
 }
 body {
     background: linear-gradient(rgb(0, 0, 0), rgb(4, 15, 1), black);
@@ -9,15 +10,17 @@ body {
     justify-content: center;
     box-shadow: 0 0 5rem;
 }
-canvas {
-    background-color: green;
+
+canvas{
+    box-shadow: 0 0 2rem rgb(65, 65, 65);
 }
 
-/*#game {
-    background-image: url("{{url_for('background', filename='background.png')}}");
-    background-size: cover;
-}*/
+#background {
+    position: absolute;
+    margin: 0 auto;
+    z-index: -1;
 
+}
 #hardWall {
     display: none;
 }
