@@ -94,7 +94,7 @@ function generateLevel() {
       else if (template[row][col] === types.swall) {
       template.cells[row][col] = types.swall;
       }
-      // All PowerUps on template to PowerUps. 
+      // All PowerUps on template to PowerUps. (Testing) 
       else if (template[row][col] === types.powerUP) {
         template.cells[row][col] = types.powerUP;
       }
