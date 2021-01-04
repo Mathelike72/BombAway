@@ -1,0 +1,72 @@
+body{
+    height: 99.8vh;
+    width: 100%;
+    margin: 0%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(85, 52, 19);
+}
+.menu{
+    display: flex;
+    height: 60vh;
+    width: 120vh;
+    padding: 5px;
+    border: 2px solid rgb(32, 20, 2);
+    border-radius: 5px;
+    background-color: rgb(58, 37, 17);
+    justify-content: center;
+    align-items: flex-end;
+    box-shadow: 0px 0px 100px rgba(255, 166, 0, 0.575);
+}
+form{
+    width: 80%;
+    top: 350px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 5%;
+}
+.button{
+    font-size: 120%;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: white;
+    border-radius: 5px;
+    background-color: rgb(151, 99, 30);
+    height: 40px;
+    width: 250px;
+}
+div{
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(87, 56, 27);
+    border: 2px solid rgb(43, 27, 13);
+    width: 280px;
+    height: 400px;
+}
+.player_name{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: center;
+    color: white;
+    margin-top: 15px;
+    border-radius: 5px;
+    border: 2px solid rgb(43, 27, 13);
+    background-color:rgb(58, 37, 17);
+    padding: 5px;
+}
+[type=radio] {
+    display: none;
+}
+[type=radio] + img {
+    width: 70px;
+    cursor: pointer;
+    border: 3px solid rgb(37, 37, 37);
+}
+[type=radio]:checked + img {
+    width: 80px;
+    cursor: pointer;
+    border: 3px solid orange;
+}

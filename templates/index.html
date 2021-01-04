@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Main Menu</title>
+    <meta charset="UTF-8">
+    <link rel="icon" type="icon/favicon" href="{{url_for('fav', filename='Bomb_1_small')}}">
+    <link rel="stylesheet" href="{{url_for('menu_stylesheet', filename='style_menu.css')}}">
+</head>
+    <body>
+        <section class="menu">
+            <form class="play" method="POST" action="http://localhost:2020/play">
+
+                <div class="player_1">
+                    <!--Name-->
+                    <input class="player_name" type="text" name="name[1]" placeholder="Name Player 1" required>
+                    <!--Buttons-->
+                    <label>
+                        <input id="img1" name="player[1]" type="radio" value="character1" checked>
+                        <img src="{{url_for('image1', filename='c1_test.png')}}">
+                    </label>
+                    <label>
+                        <input id="img2" name="player[1]" type="radio" value="character2">
+                        <img src="{{url_for('image2', filename='c2_test.png')}}">
+                    </label>
+                    <label>
+                        <input id="img3" name="player[1]" type="radio" value="character3">
+                         <img src="{{url_for('image3', filename='c3_test.png')}}">
+                    </label>
+                </div>
+
+                <input class="button" type="submit" value="Play!"> <!--Play Button-->
+
+                <div class="player_2">
+                    <!--Name-->
+                    <input class="player_name" type="text" name="name[2]" placeholder="Name Player 2" required>
+                    <!--Buttons-->
+                    <label>
+                        <input id="img1" name="player[2]" type="radio" value="character1" checked>
+                        <img src="{{url_for('image1', filename='c1_test.png')}}">
+                    </label>
+                    <label>
+                        <input id="img2" name="player[2]" type="radio" value="character2">
+                        <img src="{{url_for('image2', filename='c2_test.png')}}">
+                    </label>
+                    <label>
+                        <input id="img3" name="player[2]" type="radio" value="character3">
+                        <img src="{{url_for('image3', filename='c3_test.png')}}">
+                    </label>
+                </div>
+
+            </form>
+        </section>
+
+    </body>
+</html>
