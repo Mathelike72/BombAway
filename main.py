@@ -33,10 +33,17 @@ def game():
                 return redirect(url_for('menu'))
 
         except werkzeug.exceptions.BadRequestKeyError:
-            error_message = "Each player has to select a character"
             return redirect(url_for('menu'))
     else:
-        return redirect(url_for('menu'))
+        try:
+            return render_template('game.html',
+                                   get_character_player1=escape(session['player1']),
+                                   get_character_player2=escape(session['player2']),
+                                   get_name_player1=escape(session['name1']),
+                                   get_name_player2=escape(session['name2']),
+                                   )
+        except werkzeug.exceptions.BadRequestKeyError:
+            return redirect(url_for('menu'))
 
 
 # Remove sessions and quit to title
@@ -74,7 +81,25 @@ def dump_sessions():
     session.pop('player2', None)
     session.pop('name1', None)
     session.pop('name2', None)
-    return redirect(url_for(menu))
+    return redirect(url_for('menu'))
+
+
+# Player 1 won
+@app.route('/player_1_won')
+def player_1_won():
+    try:
+        return render_template('player_1_won.html', name=session['name1'])
+    except KeyError:
+        return redirect(url_for('menu'))
+
+
+# Player 2 won
+@app.route('/player_2_won')
+def player_2_won():
+    try:
+        return render_template('player_2_won.html', name=session['name2'])
+    except KeyError:
+        return redirect(url_for('menu'))
 
 
 # Route to files
