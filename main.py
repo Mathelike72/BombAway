@@ -1,6 +1,8 @@
 import werkzeug
-from flask import Flask, request, render_template, escape, session, redirect, url_for, send_from_directory
+from flask import Flask, request, render_template, escape, session, redirect, url_for, send_from_directory, jsonify
 import os
+import webbrowser, time
+
 
 app = Flask(__name__)
 
@@ -38,11 +40,41 @@ def game():
 
 
 # Remove sessions and quit to title
-@app.route('/quit', methods=['POST', 'GET'])
-def quit_game():
+@app.route('/back/menu')
+def back_to_title_screen():
     session.pop('player1', None)
     session.pop('player2', None)
+    session.pop('name1', None)
+    session.pop('name2', None)
     return redirect(url_for('menu'))
+
+
+# Remove sessions and shut down Server
+def shutdown_server():
+    session.pop('player1', None)
+    session.pop('player2', None)
+    session.pop('name1', None)
+    session.pop('name2', None)
+    func = request.environ.get('werkzeug.server.shutdown')
+    if func is None:
+        raise RuntimeError('Not running with the Werkzeug Server')
+    func()
+
+
+@app.route('/terminate', methods=['GET'])
+def shutdown():
+    shutdown_server()
+    return jsonify({'termination': 'True', 'sessions': 'removed',})
+
+
+# Remove all sessions
+@app.route('/dump')
+def dump_sessions():
+    session.pop('player1', None)
+    session.pop('player2', None)
+    session.pop('name1', None)
+    session.pop('name2', None)
+    return redirect(url_for(menu))
 
 
 # Route to files
@@ -116,7 +148,10 @@ app.secret_key = "\xec\x82\x16E\xb0\xe9\xec3\xccG\xe7\xd4&b\x92\t\x13\xce(\x8a\x
 
 # App Startup (port 2020) Turn debug=False at end of development
 if __name__ == '__main__':
+    webbrowser.open('http://localhost:2020')
     app.run(port=2020, debug=True)
+
+
 
 
 # Responsible Person: David Abderhalden
