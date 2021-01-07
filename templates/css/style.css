@@ -10,8 +10,6 @@ body {
     justify-content: center;
     box-shadow: 0 0 5rem;
 }
-#game {
-}
 
 canvas{
     box-shadow: 0 0 2rem rgb(65, 65, 65);
