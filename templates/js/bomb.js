@@ -437,7 +437,7 @@ document.addEventListener('keydown', function(e) {
     row++;
   }
 
-  // Left-Shift
+  // space key (bomb)
  else if (
   e.which === 16 && !cells[row][col] &&
   // count the number of bombs the player has placed
