@@ -1,6 +1,7 @@
 html, body {
     height: 100%;
     margin: 0;
+    box-sizing: border-box;
 }
 body {
     background: linear-gradient(rgb(0, 0, 0), rgb(4, 15, 1), black);
@@ -9,6 +10,25 @@ body {
     justify-content: center;
     box-shadow: 0 0 5rem;
 }
-canvas {
-    background: rgb(5, 71, 10);
+
+canvas{
+    box-shadow: 0 0 2rem rgb(65, 65, 65);
+}
+
+#background {
+    position: absolute;
+    margin: 0 auto;
+    z-index: -1;
+
+}
+#hardWall {
+    display: none;
+}
+
+#softWall{
+    display: none;
+}
+
+#powerUp{
+    display: none;
 }

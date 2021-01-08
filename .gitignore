@@ -1,3 +1,7 @@
 # Ignore these Folders:
 .idea
+<<<<<<< HEAD
 .vscode
+=======
+.vscode/
+>>>>>>> c84fc4d222c6757086c76969a2088c038b4a19be

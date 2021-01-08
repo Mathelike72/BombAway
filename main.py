@@ -22,11 +22,11 @@ def game():
             session['name2'] = request.form['name[2]']
             if session['name1'] and session['name2']:
                 return render_template('game.html',
-                                       get_character_player1=escape(session['player1']),
-                                       get_character_player2=escape(session['player2']),
-                                       get_name_player1=escape(session['name1']),
-                                       get_name_player2=escape(session['name2']),
-                                       )
+                                    get_character_player1=escape(session['player1']),
+                                    get_character_player2=escape(session['player2']),
+                                    get_name_player1=escape(session['name1']),
+                                    get_name_player2=escape(session['name2']),
+                                    )
             else:
                 return redirect(url_for('menu'))
 
@@ -72,6 +72,28 @@ def menu_stylesheet():
 # =============================================================================================
 
 
+# Images
+@app.route('/hardWall')
+def hard_wall():
+    return send_from_directory(os.path.join(app.root_path, 'docs/img/designs'), 'hardWall.png')
+
+
+@app.route('/softWall')
+def soft_wall():
+    return send_from_directory(os.path.join(app.root_path, 'docs/img/designs'), 'softWall.png')
+
+
+@app.route('/background')
+def background():
+    return send_from_directory(os.path.join(app.root_path, 'docs/img/designs'), 'background.png')
+
+
+@app.route('/upGrade1')
+def up_grade():
+    return send_from_directory(os.path.join(app.root_path, 'docs/img/designs'), 'upGrade1.png')
+# =============================================================================================
+
+
 # Characters
 @app.route('/image1')
 def image1():
@@ -87,7 +109,6 @@ def image2():
 def image3():
     return send_from_directory(os.path.join(app.root_path, 'docs/img/designs'), 'c3_test.png')
 # =============================================================================================
-
 
 # Secret Key (Must be kept secret)
 app.secret_key = "\xec\x82\x16E\xb0\xe9\xec3\xccG\xe7\xd4&b\x92\t\x13\xce(\x8a\x80\xa0\xe9x"

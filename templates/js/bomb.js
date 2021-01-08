@@ -32,126 +32,73 @@ powerUp.drawImage(img3, 0, 0);
 
 const types = {
   wall: '▉',
+  bomb: 2,
   swall: 's',
-  powerUP: 'y',
   placeholder: 'x',
+  powerUP: 'y',
 };
-
+ 
 let entities = [];
+
 let cells = [];
-
-const template2 = [
-  ['▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉'],
-  ['▉',   ,      ,   ,    ,    ,    ,    ,    ,    ,    ,'x', 'x','x','▉'],
-  ['▉',    ,'▉',     ,'▉',    ,'▉',    ,'▉',   ,'▉',    ,'▉','x','▉'],
-  ['▉',   ,   ,   ,   ,   ,    ,    ,    ,    ,     ,     ,   ,'x' , '▉'],
-  ['▉',  ,'▉',  ,'▉',   ,'▉',    ,'▉',    ,'▉',  ,'▉',    ,     '▉'],
-  ['▉',   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,          '▉'],
-  ['▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',  ,      '▉'],
-  ['▉',   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,          '▉'],
-  ['▉',   ,'▉',    ,'▉',    ,'▉',     ,'▉',     ,'▉',  ,'▉',   ,'▉'],
-  ['▉','x',   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,          '▉'],
-  ['▉','x','▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',    ,    '▉'],
-  ['▉','x' ,'x', 'x',    ,   ,   ,   ,   ,   ,   ,   ,   ,      ,     '▉'],
-  ['▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉']
-];
-
+let cells2 = [];
 const template = [
-  ['▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉'],
-  ['▉',   ,   ,   ,    ,    ,    ,    ,    ,    ,    ,'x', 'x' , 'x' ,'▉'],
-  ['▉',   ,'▉',     ,'▉',    ,'▉',    ,'▉',   ,'▉',    ,'▉', 'x','▉'],
-  ['▉',   ,   ,   ,   ,   ,    ,    ,    ,    ,     ,     ,     ,'x', '▉'],
-  ['▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',   ,     '▉'],
-  ['▉',   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,          '▉'],
-  ['▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',  ,      '▉'],
-  ['▉',   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,          '▉'],
-  ['▉',   ,'▉',    ,'▉',    ,'▉',     ,'▉',     ,'▉',  ,'▉',   ,'▉'],
-  ['▉','x',   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,   ,          '▉'],
-  ['▉','x','▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',   ,'▉',    ,    '▉'],
-  ['▉','x' ,'x', 'x',    ,   ,   ,   ,   ,   ,   ,   ,   ,      ,     '▉'],
-  ['▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉']
+  ['▉','▉','▉','▉','▉', '▉','▉','▉','▉','▉','▉','▉', '▉','▉','▉'],
+  ['▉',    ,    ,    ,    ,    ,    ,    ,    ,   ,    ,'x' ,'x' ,'x' ,'▉'],
+  ['▉',    ,'▉',    ,'▉',    ,'▉',    ,'▉' ,   ,'▉',    ,'▉','x' ,'▉'],
+  ['▉',    ,    ,    ,    ,    ,    ,    ,    ,   ,    ,    ,    ,'x' ,'▉'],
+  ['▉',    ,'▉',    ,'▉',    ,'▉',    ,'▉' ,   ,'▉',    ,'▉',    ,'▉'],
+  ['▉',    ,    ,    ,    ,    ,    ,    ,    ,   ,    ,    ,    ,    ,'▉'],
+  ['▉',    ,'▉',    ,'▉',    ,'▉',    ,'▉' ,   ,'▉',    ,'▉',    ,'▉'],
+  ['▉',    ,    ,    ,    ,    ,    ,    ,    ,   ,    ,    ,    ,    ,'▉'],
+  ['▉',    ,'▉',    ,'▉',    ,'▉',    ,'▉' ,   ,'▉',    ,'▉',    ,'▉'],
+  ['▉','x' ,    ,    ,    ,    ,    ,    ,    ,   ,    ,    ,    ,    ,'▉'],
+  ['▉','x' ,'▉',    ,'▉',    ,'▉',    ,'▉' ,   ,'▉',    ,'▉',    ,'▉'],
+  ['▉','x' ,'x' ,'x' ,    ,    ,    ,    ,    ,   ,    ,    ,    ,    ,'▉'],
+  ['▉','▉','▉','▉','▉', '▉','▉','▉','▉','▉','▉','▉', '▉','▉','▉'],
 ];
 
 
-// populate the level with walls
+// populate the level with objects
 function generateLevel() {
-  template.cells = [];
+  cells = [];
 
   for (let row = 0; row < numRows; row++) {
-    template.cells[row] = [];
+    cells[row] = [];
 
     for (let col = 0; col < numCols; col++) {
 
       // 80% chance cells turn soft wall
       if (template[row][col] !== types.wall && template[row][col] !== types.placeholder && template[row][col] !== types.powerUP && Math.random() < 0.8){
-        template.cells[row][col] = types.swall;
+        cells[row][col] = types.swall;
         // template2.cells[row][col] = types.powerUP;
       }
       // All Walls on template to Walls. 
       else if (template[row][col] === types.wall) {
-        template.cells[row][col] = types.wall;
+        cells[row][col] = types.wall;
       }
-      // All Swalls on template to Swalls. 
-      else if (template[row][col] === types.swall) {
-      template.cells[row][col] = types.swall;
-      }
-      // All PowerUps on template to PowerUps. 
-      else if (template[row][col] === types.powerUP) {
-        template.cells[row][col] = types.powerUP;
-      }
+      
     }
   }
 }
 
 // background Engine for PowerUp and other stuff
 function generateLevelback() {
-  template2.cells = [];
-
+  cells2 = [];
+  
   for (let row = 0; row < numRows; row++) {
-    template2.cells[row] = [];
+    cells2[row] = [];
 
     for (let col = 0; col < numCols; col++) {
 
       // 20% chance cells turn out Upgrade
-      if (!template[row][col] === types.swall && Math.random() < 0.2) {
-        tamplate2.cells[row][col] = types.powerUp;
+      if (cells[row][col] === types.swall && Math.random() < 0.2) {
+        cells2[row][col] = types.powerUP;
       }
     }
   }
 }
 
-// player character (just a simple circle)
-const player = {
-  row: 1,
-  col: 13,
-  radius: grid * 0.4,
-  render() {
-    const x = (this.col + 0.5) * 64;
-    const y = (this.row + 0.5) * 64;
-
-    context.save();
-    context.fillStyle = 'yellow';
-    context.beginPath();
-    context.arc(x, y, this.radius, 0, 2 * Math.PI);
-    context.fill();
-  }
-}
-// player character (just a simple circle)
-const player2 = {
-  row: 11,
-  col: 1,
-  radius: grid * 0.4,
-  render() {
-    const x = (this.col + 0.5) * 64;
-    const y = (this.row + 0.5) * 64;
-
-    context.save();
-    context.fillStyle = 'white';
-    context.beginPath();
-    context.arc(x, y, this.radius, 0, 2 * Math.PI);
-    context.fill();
-  }
-}
 
 // blow up a bomb and its surrounding tiles
 function blowUpBomb(bomb) {
@@ -182,7 +129,6 @@ function blowUpBomb(bomb) {
     row: 0,
     col: 1
   }];
-
   dirs.forEach((dir) => {
     for (let i = 0; i < bomb.size; i++) {
       const row = bomb.row + dir.row * i;
@@ -331,6 +277,47 @@ function Explosion(row, col, dir, center) {
   };
 }
 
+
+
+// player character (just a simple circle)
+const player = {
+  row: 1,
+  col: 13,
+  numBombs: 1,
+  bombSize: 2,
+  radius: grid * 0.4,
+  render() {
+    const x = (this.col + 0.5) * 64;
+    const y = (this.row + 0.5) * 64;
+
+    context.save();
+    context.fillStyle = 'yellow';
+    context.beginPath();
+    context.arc(x, y, this.radius, 0, 2 * Math.PI);
+    context.fill();
+  }
+}
+// player character (just a simple circle)
+const player2 = {
+  row: 11,
+  col: 1,
+  numBombs: 1,
+  bombSize: 3,
+  radius: grid * 0.4,
+  render() {
+    const x = (this.col + 0.5) * 64;
+    const y = (this.row + 0.5) * 64;
+
+    context.save();
+    context.fillStyle = 'white';
+    context.beginPath();
+    context.arc(x, y, this.radius, 0, 2 * Math.PI);
+    context.fill();
+  }
+};
+
+
+
 // game loop
 let last;
 let dt;
@@ -349,20 +336,20 @@ function loop(timestamp) {
   // update and render everything in template 
   for (let row = 0; row < numRows; row++) {
     for (let col = 0; col < numCols; col++) {
-      switch(template.cells[row][col]) {
+      switch(cells[row][col]) {
         case types.wall:
           context.drawImage(wallCanvas, col * grid, row * grid);
           break;
-        case types.swall:
+          case types.swall:
           context.drawImage(swallCanvas, col * grid, row * grid);
           break;
-        case types.powerUP:
+          case types.powerUP:
           context.drawImage(powerUpCanvas, col * grid, row * grid);
           break;
       }
     }
   }
-
+/*
   // update and render everything in template2
   for (let row = 0; row < numRows; row++) {
     for (let col = 0; col < numCols; col++) {
@@ -371,7 +358,7 @@ function loop(timestamp) {
           context.drawImage(powerUpCanvas, col * grid, row * grid);
       }
     }
-  }
+  }*/
 
   // update and render all entities
   entities.forEach((entity) => {
@@ -408,15 +395,8 @@ document.addEventListener('keydown', function(e) {
   else if (e.which === 40) {
     row++;
   }
-  // placing bomb
-
-  // don't move the player if something is already at that position
-  if (template.cells[row][col] !== types.wall && template.cells[row][col] !== types.swall) {
-    player.row = row;
-    player.col = col;
-  }
-  // space key (bomb)
-  else if (
+ // space key (bomb)
+ else if (
   e.which === 32 && !cells[row][col] &&
   // count the number of bombs the player has placed
   entities.filter((entity) => {
@@ -456,29 +436,24 @@ document.addEventListener('keydown', function(e) {
   else if (e.which === 83) {
     row++;
   }
-  // placing bomb
-  else if (e.which === 32){
-    bombe ();
-  }
-  // don't move the player if something is already at that position
-  if (template.cells[row][col] !== types.wall && template.cells[row][col] !== types.swall) {
-    player2.row = row;
-    player2.col = col;
-  }
-  // space key (bomb)
-  else if (
+
+  // Left-Shift
+ else if (
   e.which === 16 && !cells[row][col] &&
   // count the number of bombs the player has placed
   entities.filter((entity) => {
     return entity.type === types.bomb && entity.owner === player
-  }).length < player.numBombs) {
+  }).length < player.numBombs
+) {
   // place bomb
   const bomb = new Bomb(row, col, player.bombSize, player);
   entities.push(bomb);
   cells[row][col] = types.bomb;
   }
+
+
   // don't move the player if something is already at that position
-  if (cells[row][col] !== types.wall && cells[row][col] !== types.swall && cells[row][col] !== types.bomb)  {
+   if (cells[row][col] !== types.wall && cells[row][col] !== types.swall && cells[row][col] !== types.bomb)  {
     player2.row = row;
     player2.col = col;
   }
