@@ -1,0 +1,60 @@
+body{
+    height: 70vh;
+    width: 100%;
+    margin: 0%;
+    padding-top: 8%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(85, 52, 19);
+}
+p#text{
+    font-size: 300%;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: rgb(255, 255, 255);
+}
+a{
+    margin: 4px;
+    appearance: push-button;
+    user-select: none;
+    white-space: pre;
+    align-items: center;
+    text-align: center;
+    cursor: default;
+    box-sizing: border-box;
+    padding: 1px 6px;
+    padding-top: 7px;
+    border-width: 2px;
+    border-style: outset;
+    border-image: initial;
+    font-size: 120%;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    background-color: rgb(151, 99, 30);
+    height: 40px;
+    width: 250px;
+}
+a:hover{
+    background-color: rgb(189, 136, 66)
+}
+a:active{
+    border: 2px solid black;
+}
+a:hover span {
+    display:none
+}
+
+a#one:hover:before{
+    content: "Main Menu";
+}
+
+a#two:hover:before{
+    content: "Another battle!";
+}
+
+a#three:hover:before{
+    content: "Already?";
+}

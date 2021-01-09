@@ -1,8 +1,7 @@
 import werkzeug
 from flask import Flask, request, render_template, escape, session, redirect, url_for, send_from_directory, jsonify
 import os
-import webbrowser, time
-
+import webbrowser
 
 app = Flask(__name__)
 
@@ -24,11 +23,11 @@ def game():
             session['name2'] = request.form['name[2]']
             if session['name1'] and session['name2']:
                 return render_template('game.html',
-                                    get_character_player1=escape(session['player1']),
-                                    get_character_player2=escape(session['player2']),
-                                    get_name_player1=escape(session['name1']),
-                                    get_name_player2=escape(session['name2']),
-                                    )
+                                       get_character_player1=escape(session['player1']),
+                                       get_character_player2=escape(session['player2']),
+                                       get_name_player1=escape(session['name1']),
+                                       get_name_player2=escape(session['name2']),
+                                       )
             else:
                 return redirect(url_for('menu'))
 
@@ -42,7 +41,7 @@ def game():
                                    get_name_player1=escape(session['name1']),
                                    get_name_player2=escape(session['name2']),
                                    )
-        except werkzeug.exceptions.BadRequestKeyError:
+        except KeyError:
             return redirect(url_for('menu'))
 
 
@@ -71,7 +70,7 @@ def shutdown_server():
 @app.route('/terminate', methods=['GET'])
 def shutdown():
     shutdown_server()
-    return jsonify({'termination': 'True', 'sessions': 'removed',})
+    return jsonify({'termination': 'True', 'sessions': 'removed', })
 
 
 # Remove all sessions
@@ -107,13 +106,17 @@ def player_2_won():
 @app.route('/favicon')
 def fav():
     return send_from_directory(os.path.join(app.root_path, 'docs/img/favicon'), 'Bomb_1_small.png')
+
+
 # =============================================================================================
 
 
 # JavaScripts
-@app.route('/main.js')
+@app.route('/bomb.js')
 def game_script():
-    return send_from_directory(os.path.join(app.root_path, 'templates/js'), 'main.js')
+    return send_from_directory(os.path.join(app.root_path, 'templates/js'), 'bomb.js')
+
+
 # =============================================================================================
 
 
@@ -126,6 +129,13 @@ def game_stylesheet():
 @app.route('/style_menu.css')
 def menu_stylesheet():
     return send_from_directory(os.path.join(app.root_path, 'templates/css'), 'style_menu.css')
+
+
+@app.route('/style_game_over.css')
+def game_over_stylesheet():
+    return send_from_directory(os.path.join(app.root_path, 'templates/css'), 'style_game_over.css')
+
+
 # =============================================================================================
 
 
@@ -148,6 +158,8 @@ def background():
 @app.route('/upGrade1')
 def up_grade():
     return send_from_directory(os.path.join(app.root_path, 'docs/img/designs'), 'upGrade1.png')
+
+
 # =============================================================================================
 
 
@@ -165,19 +177,17 @@ def image2():
 @app.route('/image3')
 def image3():
     return send_from_directory(os.path.join(app.root_path, 'docs/img/designs'), 'c3_test.png')
+
+
 # =============================================================================================
 
 # Secret Key (Must be kept secret)
 app.secret_key = "\xec\x82\x16E\xb0\xe9\xec3\xccG\xe7\xd4&b\x92\t\x13\xce(\x8a\x80\xa0\xe9x"
 
-
 # App Startup (port 2020) Turn debug=False at end of development
 if __name__ == '__main__':
     webbrowser.open('http://localhost:2020')
-    app.run(port=2020, debug=True)
-
-
-
+    app.run(port=2020, debug=False)              # SET DEBUG TO FALSE BEFORE DEPLOYMENT!
 
 # Responsible Person: David Abderhalden
 # Repository: BombAway
