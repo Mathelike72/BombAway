@@ -116,7 +116,7 @@ def game_script():
     return send_from_directory(os.path.join(app.root_path, 'templates/js'), 'main.js')
 
 @app.route('/bomb.js')
-def game_script():
+def bomb_script():
     return send_from_directory(os.path.join(app.root_path, 'templates/js'), 'bomb.js')    
 # =============================================================================================
 
