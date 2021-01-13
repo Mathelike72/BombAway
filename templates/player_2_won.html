@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Game Over</title>
+    <link rel="icon" type="icon/favicon" href="{{url_for('fav', filename='Bomb_1_small')}}">
+    <link rel="stylesheet" href="{{url_for('game_over_stylesheet', filename='style_game_over.css')}}">
+</head>
+<body>
+    <p id="text">{{name}} won the Game!!</p>
+    <a class="button" id="one" href="http://localhost:2020/dump"><span>Back to Title Screen</span></a>
+    <a class="button" id="two" href="http://localhost:2020/play"><span>Play Again</span></a>
+    <a class="button" id="three" href="http://localhost:2020/terminate"><span>Quit Game</span></a>
+</body>
+</html>
