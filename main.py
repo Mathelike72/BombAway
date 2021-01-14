@@ -114,7 +114,7 @@ def fav():
 # JavaScripts
 @app.route('/bomb.js')
 def game_script():
-    return send_from_directory(os.path.join(app.root_path, 'templates/js'), 'bomb.js')
+    return send_from_directory(os.path.join(app.root_path, 'templates/js'), 'main.js')
 
 
 # =============================================================================================
@@ -157,7 +157,7 @@ def background():
 
 @app.route('/upGrade1')
 def up_grade():
-    return send_from_directory(os.path.join(app.root_path, 'docs/img/designs'), 'upGrade1.png')
+    return send_from_directory(os.path.join(app.root_path, 'docs/img/designs'), 'powerUP.png')
 
 
 # =============================================================================================

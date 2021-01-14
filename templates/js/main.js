@@ -29,13 +29,10 @@ var img3 = document.getElementById('powerUp');
 powerUpCanvas.width = powerUpCanvas.height = grid;
 powerUp.drawImage(img3, 0, 0); 
 
-
 const types = {
   wall: '▉',
   bomb: 2,
   bomb1: 3,
-  player: 4,
-  player2: 5,
   swall: 's',
   placeholder: 'x',
   powerUP: 'y',
@@ -47,7 +44,7 @@ let cells = [];
 let cells2 = [];
 const template = [
   ['▉','▉','▉','▉','▉', '▉','▉','▉','▉','▉','▉','▉', '▉','▉','▉'],
-  ['▉',    ,    ,    ,    ,    ,    ,    ,    ,   ,    ,'x' ,'x' ,'x' ,'▉'],
+  ['▉',    ,    ,    ,    ,    ,    ,    ,    ,   ,    ,'x' ,'x' ,'j' ,'▉'],
   ['▉',    ,'▉',    ,'▉',    ,'▉',    ,'▉' ,   ,'▉',    ,'▉','x' ,'▉'],
   ['▉',    ,    ,    ,    ,    ,    ,    ,    ,   ,    ,    ,    ,'x' ,'▉'],
   ['▉',    ,'▉',    ,'▉',    ,'▉',    ,'▉' ,   ,'▉',    ,'▉',    ,'▉'],
@@ -57,7 +54,7 @@ const template = [
   ['▉',    ,'▉',    ,'▉',    ,'▉',    ,'▉' ,   ,'▉',    ,'▉',    ,'▉'],
   ['▉','x' ,    ,    ,    ,    ,    ,    ,    ,   ,    ,    ,    ,    ,'▉'],
   ['▉','x' ,'▉',    ,'▉',    ,'▉',    ,'▉' ,   ,'▉',    ,'▉',    ,'▉'],
-  ['▉','x' ,'x' ,'x' ,    ,    ,    ,    ,    ,   ,    ,    ,    ,    ,'▉'],
+  ['▉','k' ,'x' ,'x' ,    ,    ,    ,    ,    ,   ,    ,    ,    ,    ,'▉'],
   ['▉','▉','▉','▉','▉', '▉','▉','▉','▉','▉','▉','▉', '▉','▉','▉'],
 ];
 
@@ -75,14 +72,14 @@ function generateLevel() {
       if (template[row][col] !== types.wall && template[row][col] !== types.placeholder &&  Math.random() < 0.1){
         cells[row][col] = types.swall;
       }
-      else if (template[row][col] === types.player){
-        cells[row][col] = types.player;
+      else if (template[row][col] === types.playerblue){
+        cells[row][col] = types.playerblue;
       }
       // All Walls on template to Walls. 
       else if (template[row][col] === types.wall) {
         cells[row][col] = types.wall;
       }
-
+     
 
      // if (template[row][col] !== types.player ){
        // cells[row][col] = types.player;
@@ -164,6 +161,29 @@ function blowUpBomb(bomb) {
       const col = bomb.col + dir.col * i;
       const cell = cells[row][col];
 
+
+      switch (cell) {
+        case 'softWall':
+          if (cell === types.swall){
+            cell = 0;
+            break;
+          }
+        case 'player':
+          if (cell === types.player) {
+            player1won();
+            break;
+          }
+        case 'player2':
+          if (cell === types.player2) {
+            player2won();
+            break;
+          }
+        default:
+          if(cell === types.wall) {
+            return;
+          }
+      }
+        
       // stop the explosion if it hit a wall
       if (cell === types.wall) {
         return;
@@ -495,43 +515,34 @@ const player = {
   col: 13,
   numBombsP1: 10,
   bombSizeP1: 2,
-  radius: grid * 0.4,
+  
+  render() {
+    
+    context.save();
+    context.drawImage(img4,0,0); // will draw the playing gif image
+
+  },
   player1won() {
     window.location.href = 'http://www.google.com';
-  },
-  render() {
-    const x = (this.col + 0.5) * 64;
-    const y = (this.row + 0.5) * 64;
-
-    context.save();
-    context.fillStyle = 'yellow';
-    context.beginPath();
-    context.arc(x, y, this.radius, 0, 2 * Math.PI);
-    context.fill();
   }
 }
-
 
 
 // player character (just a simple circle)
 const player2 = {
   row: 11,
   col: 1,
-  numBombsP2: 1,
+  numBombsP2: 10,
   bombSizeP2: 2,
   radius: grid * 0.4,
-  player2won() {
-    window.location.href = 'http://www.google.com';
-  },
   render() {
-    const x = (this.col + 0.5) * 64;
-    const y = (this.row + 0.5) * 64;
 
     context.save();
-    context.fillStyle = 'white';
-    context.beginPath();
-    context.arc(x, y, this.radius, 0, 2 * Math.PI);
-    context.fill();
+    context.drawImage(img4,0,0); // will draw the playing gif image
+
+  },
+  player2won() {
+    window.location.href = 'http://www.google.com';
   }
 };
 
@@ -568,16 +579,6 @@ function loop(timestamp) {
       }
     }
   }
-/*
-  // update and render everything in template2
-  for (let row = 0; row < numRows; row++) {
-    for (let col = 0; col < numCols; col++) {
-      switch(template2.cells[row][col]) {
-        case types.powerUP:
-          context.drawImage(powerUpCanvas, col * grid, row * grid);
-      }
-    }
-  }*/
 
   // update and render all entities
   entities.forEach((entity) => {
@@ -636,19 +637,16 @@ document.addEventListener('keydown', function(e) {
     player.row = row;
     player.col = col;
   }
+
+  
   /*if (types.player === cells[row][col] && types.bomb1 === cells[row][col]) {
     player2.player2won()
   }*/
-  if (types.player === Explosion()) {
+  /*if (types.player === Explosion()) {
     player2.player2won()
-  }
+  }*/
   // bomb has already exploded so don't blow up again
-  if (!bomb.alive) return;
-
-  bomb.alive = false;
-
-  // remove bomb from grid
-  cells[bomb.row][bomb.col] = null;
+  
 });
 
 
