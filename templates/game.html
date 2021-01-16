@@ -9,7 +9,9 @@
 </head>
   <body>
 
-    <canvas id="game" width="960px" height="832px"></canvas>
+    <div id="middle">
+      <canvas id="game" width="960px" height="832px"></canvas>
+    </div>
     
    <img src="{{url_for('background', filename='background.png')}}" id="background"/>
     <img src="{{url_for('hard_wall', filename='hardWall.png')}}" id="hardWall"/>
