@@ -186,16 +186,16 @@ setTimeout(function(){
   
   
   
-      if (TestPlayer(player1, col, row)) {                                //#ajouté#
+      if (TestPlayer(player2, col, row)) {                                //#ajouté#
           console.log("1 got exploded.");                                 //  |
           player1.reset();                                                //  V
           player2.reset();
           generateLevel();
       }
-      if (TestPlayer(player2, col, row)) {
+      if (TestPlayer(player1, col, row)) {
           console.log("2 got exploded.");
-          player1.reset();
           player2.reset();
+          player1.reset();
           generateLevel();                                                //  A
       }    
   
@@ -321,14 +321,14 @@ setTimeout(function(){
   
   
   // player character (just a simple circle)
-  const player1 = {
+  const player2 = {
     row: 1,
     col: 13,
     numBombs: 1,
     bombSize: 2,
     radius: grid * 0.4,
     reset() {
-      window.open("http://localhost:2020/player_1_won");
+      window.open("http://localhost:2020/player_1_won","_self");
     },
     render() {
       const x = (this.col + 0.5) * 64;
@@ -345,14 +345,14 @@ setTimeout(function(){
   
   
   // player character (just a simple circle)
-  const player2 = {
+  const player1 = {
     row: 11,
     col: 1,
     numBombs: 1,
     bombSize: 2,
     radius: grid * 0.4,
     reset() {
-      window.location.assign("{{url_for('player_1_won', filename='player_1_won.html')}}");
+      window.open("http://localhost:2020/player_2_won","_self");
     },
     render() {
       const x = (this.col + 0.5) * 64;
@@ -411,16 +411,16 @@ setTimeout(function(){
     // remove dead entities
     entities = entities.filter((entity) => entity.alive);
   
-    player1.render();
     player2.render();
+    player1.render();
   }
   
   
   
   // listen to keyboard events to move the player
   document.addEventListener('keydown', function(e) {
-    let row1 = player1.row;
-    let col1 = player1.col;
+    let row1 = player2.row;
+    let col1 = player2.col;
   
     // left arrow key
     if (e.which === 37) {
@@ -438,45 +438,45 @@ setTimeout(function(){
     else if (e.which === 40) {
       row1++;
     }
-   // space key (bomb)
+   // num 1 key (Bomb player2)
    else if (
-    e.which === 32 && !cells[row1][col1] &&
+    e.which === 97 && !cells[row1][col1] &&
     // count the number of bombs the player has placed
     entities.filter((entity) => {
-      return entity.type === types.bomb && entity.owner === player1
-    }).length < player1.numBombs
+      return entity.type === types.bomb && entity.owner === player2
+    }).length < player2.numBombs
   ) {
     // place bomb
-    const bomb = new Bomb(row1, col1, player1.bombSize, player1);
+    const bomb = new Bomb(row1, col1, player2.bombSize, player2);
     entities.push(bomb);
     cells[row1][col1] = types.bomb;
     }
   
     // don't move the player if something is already at that position
     if (!cells[row1][col1]) {
-      player1.row = row1;
-      player1.col = col1;
+      player2.row = row1;
+      player2.col = col1;
     }
   
     else if (cells[row1][col1] === types.numberBombUp){
       console.log("numberBombUp ramasse");
       cells[row1][col1] = 0;
-      player1.row = row1;
-      player1.col = col1;
-      player1.numBombs++;
+      player2.row = row1;
+      player2.col = col1;
+      player2.numBombs++;
   }
   
   else if (cells[row1][col1] === types.bombSizeUp){
       console.log("numberBombUp ramasse");
       cells[row1][col1] = 0;
-      player1.row = row1;
-      player1.col = col1;
-      player1.bombSize++;     
+      player2.row = row1;
+      player2.col = col1;
+      player2.bombSize++;     
   }});
   
   document.addEventListener('keydown', function(e){
-    let row2 = player2.row;
-    let col2 = player2.col;
+    let row2 = player1.row;
+    let col2 = player1.col;
   
     // left arrow key
     if (e.which === 65) {
@@ -495,16 +495,16 @@ setTimeout(function(){
       row2++;
     }
   
-    // x key (Bomb)
+    // r key (Bomb player1)
    else if (
-    e.which === 88 && !cells[row2][col2] &&
+    e.which === 82 && !cells[row2][col2] &&
     // count the number of bombs the player has placed
     entities.filter((entity) => {
-      return entity.type === types.bomb && entity.owner === player2
-    }).length < player2.numBombs
+      return entity.type === types.bomb && entity.owner === player1
+    }).length < player1.numBombs
   ) {
     // place bomb
-    const bomb = new Bomb(row2, col2, player2.bombSize, player2);
+    const bomb = new Bomb(row2, col2, player1.bombSize, player1);
     entities.push(bomb);
     cells[row2][col2] = types.bomb;
     }
@@ -512,26 +512,26 @@ setTimeout(function(){
   
     // don't move the player if something is already at that position
      if (!cells[row2][col2])  {
-      player2.row = row2;
-      player2.col = col2;
+      player1.row = row2;
+      player1.col = col2;
     }
     else if (cells[row2][col2] === types.numberBombUp){
       console.log("numberBombUp ramasse");
       cells[row2][col2] = 0;
-      player2.row = row2;
-      player2.col = col2;
-      player2.numBombs++;
+      player1.row = row2;
+      player1.col = col2;
+      player1.numBombs++;
   }
   else if (cells[row2][col2] === types.bombSizeUp){
       console.log("numberBombUp ramasse");
       cells[row2][col2] = 0;
-      player2.row = row2;
-      player2.col = col2;
-      player2.bombSize++;
+      player1.row = row2;
+      player1.col = col2;
+      player1.bombSize++;
   }    
   });
   
   // start the game
   generateLevel(); //Where the blocks spawn
   requestAnimationFrame(loop);
-  }, 100);
+  }, 200);
