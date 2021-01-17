@@ -17,6 +17,8 @@
     <img src="{{url_for('hard_wall', filename='hardWall.png')}}" id="hardWall"/>
     <img src="{{url_for('soft_wall', filename='softWall.png')}}" id="softWall"/>
     <img src="{{url_for('up_grade', filename='powerUP.png')}}" id="powerUp"/>
+    <p id="player1_session">{{get_character_player1}}</p>
+    <p id="player2_session">{{get_character_player2}}</p>
 
     <script type=text/javascript src="{{url_for('game_script', filename='main.js')}}"></script>
   </body>

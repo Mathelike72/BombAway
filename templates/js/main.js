@@ -29,20 +29,26 @@ setTimeout(function(){
   
   // numberBomb
   const numberBombUpCanvas = document.createElement('canvas');
-  const numberBombUpCtx = numberBombUpCanvas.getContext("2d");
+  const numberBombUpCtx = numberBombUpCanvas.getContext('2d');
+  var img3 = document.getElementById('powerUp');
   numberBombUpCanvas.width = numberBombUpCanvas.height = grid;
+  numberBombUpCtx.drawImage(img3, 0, 0); 
+
+  //const numberBombUpCtx = numberBombUpCanvas.getContext("2d");
+  //numberBombUpCanvas.width = numberBombUpCanvas.height = grid;
   
-  numberBombUpCtx.fillStyle = 'black';
-  numberBombUpCtx.beginPath();
-  numberBombUpCtx.arc(grid/2, grid/2, grid*0.3 , 0, 2 * Math.PI);
-  numberBombUpCtx.fill();
+
+  //numberBombUpCtx.fillStyle = 'black';
+  //numberBombUpCtx.beginPath();
+  //numberBombUpCtx.arc(grid/2, grid/2, grid*0.3 , 0, 2 * Math.PI);
+  //numberBombUpCtx.fill();
   
-  numberBombUpCtx.strokeStyle = 'grey';
-  numberBombUpCtx.lineWidth = 5;
-  numberBombUpCtx.beginPath();
-  numberBombUpCtx.arc( grid-20, grid -45, 10, Math.PI, -Math.PI / 2
-  );
-  numberBombUpCtx.stroke();
+  //numberBombUpCtx.strokeStyle = 'grey';
+  //numberBombUpCtx.lineWidth = 5;
+  //numberBombUpCtx.beginPath();
+  //numberBombUpCtx.arc( grid-20, grid -45, 10, Math.PI, -Math.PI / 2
+  //);
+  //numberBombUpCtx.stroke();
   
   //bombsize
   const bombSizeUpCanvas = document.createElement('canvas');
@@ -53,6 +59,12 @@ setTimeout(function(){
   bombSizeUpCtx.fillRect(grid/2-grid/12, grid/10, grid/6, grid-grid/5);
   bombSizeUpCtx.fillStyle = 'darkred';
   bombSizeUpCtx.fillRect(grid/10, grid/2-grid/12, grid-grid/5, grid/6);
+
+  // Player1 Session Cookie
+  session1 = document.getElementById('player1_session').innerHTML;
+
+  // Player2 Session Cookie
+  session2 = document.getElementById('player2_session').innerHTML;
   
   const types = {
     wall: '▉',
@@ -334,11 +346,27 @@ setTimeout(function(){
       const x = (this.col + 0.5) * 64;
       const y = (this.row + 0.5) * 64;
   
-      context.save();
-      context.fillStyle = 'yellow';
-      context.beginPath();
-      context.arc(x, y, this.radius, 0, 2 * Math.PI);
-      context.fill();
+      if(session2 == "character1"){
+        context.save();
+        context.fillStyle = 'yellow';
+        context.beginPath();
+        context.arc(x, y, this.radius, 0, 2 * Math.PI);
+        context.fill();
+      }
+      if(session2 == "character2"){
+        context.save();
+        context.fillStyle = 'white';
+        context.beginPath();
+        context.arc(x, y, this.radius, 0, 2 * Math.PI);
+        context.fill();
+      }
+      if(session2 == "character3"){
+        context.save();
+        context.fillStyle = 'blue';
+        context.beginPath();
+        context.arc(x, y, this.radius, 0, 2 * Math.PI);
+        context.fill();
+      }
     }
   }
   
@@ -358,13 +386,29 @@ setTimeout(function(){
       const x = (this.col + 0.5) * 64;
       const y = (this.row + 0.5) * 64;
   
-      context.save();
-      context.fillStyle = 'white';
-      context.beginPath();
-      context.arc(x, y, this.radius, 0, 2 * Math.PI);
-      context.fill();
+      if(session1 == "character1"){
+        context.save();
+        context.fillStyle = 'yellow';
+        context.beginPath();
+        context.arc(x, y, this.radius, 0, 2 * Math.PI);
+        context.fill();
+      }
+      if(session1 == "character2"){
+        context.save();
+        context.fillStyle = 'white';
+        context.beginPath();
+        context.arc(x, y, this.radius, 0, 2 * Math.PI);
+        context.fill();
+      }
+      if(session1 == "character3"){
+        context.save();
+        context.fillStyle = 'blue';
+        context.beginPath();
+        context.arc(x, y, this.radius, 0, 2 * Math.PI);
+        context.fill();
+      }
     }
-  };
+  }
   
   
   
@@ -398,7 +442,7 @@ setTimeout(function(){
               break;                                                                  //  V
           case types.bombSizeUp:
               context.drawImage(bombSizeUpCanvas, col * grid, row * grid);            //  A
-              break;         
+              break;     
         }
       }
     }

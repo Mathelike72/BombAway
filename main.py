@@ -70,7 +70,7 @@ def shutdown_server():
 @app.route('/terminate', methods=['GET'])
 def shutdown():
     shutdown_server()
-    return jsonify({'termination': 'True', 'sessions': 'removed', })
+    return 'Server is shutting down ...' #jsonify({'termination': 'True', 'sessions': 'removed', })
 
 
 # Remove all sessions
@@ -166,17 +166,17 @@ def up_grade():
 # Characters
 @app.route('/image1')
 def image1():
-    return send_from_directory(os.path.join(app.root_path, 'docs/img/designs'), 'c1_test.png')
+    return send_from_directory(os.path.join(app.root_path, 'docs/img/designs'), 'yellow.png')
 
 
 @app.route('/image2')
 def image2():
-    return send_from_directory(os.path.join(app.root_path, 'docs/img/designs'), 'c2_test.png')
+    return send_from_directory(os.path.join(app.root_path, 'docs/img/designs'), 'white.png')
 
 
 @app.route('/image3')
 def image3():
-    return send_from_directory(os.path.join(app.root_path, 'docs/img/designs'), 'c3_test.png')
+    return send_from_directory(os.path.join(app.root_path, 'docs/img/designs'), 'blue.png')
 
 
 # =============================================================================================
