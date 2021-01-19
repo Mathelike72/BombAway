@@ -159,6 +159,17 @@ def background():
 def up_grade():
     return send_from_directory(os.path.join(app.root_path, 'docs/img/designs'), 'powerUP.png')
 
+@app.route('/sp_blau')
+def sp_blau():
+    return send_from_directory(os.path.join(app.root_path, 'docs/img/designs'), 'spieler_blau.gif')
+
+@app.route('/sp_rot')
+def sp_rot():
+    return send_from_directory(os.path.join(app.root_path, 'docs/img/designs'), 'spieler_rot.gif')
+
+@app.route('/sp_grün')
+def sp_grün():
+    return send_from_directory(os.path.join(app.root_path, 'docs/img/designs'), 'spieler_grün.gif')
 
 # =============================================================================================
 
@@ -166,17 +177,17 @@ def up_grade():
 # Characters
 @app.route('/image1')
 def image1():
-    return send_from_directory(os.path.join(app.root_path, 'docs/img/designs'), 'yellow.png')
+    return send_from_directory(os.path.join(app.root_path, 'docs/img/designs'), 'spieler_grün.gif')
 
 
 @app.route('/image2')
 def image2():
-    return send_from_directory(os.path.join(app.root_path, 'docs/img/designs'), 'white.png')
+    return send_from_directory(os.path.join(app.root_path, 'docs/img/designs'), 'spieler_rot.gif')
 
 
 @app.route('/image3')
 def image3():
-    return send_from_directory(os.path.join(app.root_path, 'docs/img/designs'), 'blue.png')
+    return send_from_directory(os.path.join(app.root_path, 'docs/img/designs'), 'spieler_blau.gif')
 
 
 # =============================================================================================

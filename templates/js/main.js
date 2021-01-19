@@ -20,12 +20,12 @@ setTimeout(function(){
   swallCanvas.width = swallCanvas.height = grid;
   swall.drawImage(img2, 0, 0); 
   
-  // canvas for power-up
+  /* canvas for power-up
   const powerUpCanvas = document.createElement('canvas');
   const powerUp = powerUpCanvas.getContext('2d');
   var img3 = document.getElementById('powerUp');
   powerUpCanvas.width = powerUpCanvas.height = grid;
-  powerUp.drawImage(img3, 0, 0); 
+  powerUp.drawImage(img3, 0, 0); */
   
   // numberBomb
   const numberBombUpCanvas = document.createElement('canvas');
@@ -343,28 +343,49 @@ setTimeout(function(){
       window.open("http://localhost:2020/player_1_won","_self");
     },
     render() {
-      const x = (this.col + 0.5) * 64;
-      const y = (this.row + 0.5) * 64;
+      const x = (this.col) * 64;
+      const y = (this.row) * 64;
   
       if(session2 == "character1"){
         context.save();
-        context.fillStyle = 'yellow';
+
+        // sp_grün
+        const playerblueCanvas = document.createElement('canvas');
+        const playergrün = playerblueCanvas.getContext('2d');
+        var img7 = document.getElementById('sp_grün');
+        playergrün.width = playergrün.height = grid;
+        playergrün.drawImage(img7, x, y);
+
         context.beginPath();
-        context.arc(x, y, this.radius, 0, 2 * Math.PI);
+        context.drawImage(img7, x, y);
         context.fill();
       }
       if(session2 == "character2"){
         context.save();
-        context.fillStyle = 'white';
+
+        // sp_rot
+        const playerblueCanvas = document.createElement('canvas');
+        const playerrot = playerblueCanvas.getContext('2d');
+        var img6 = document.getElementById('sp_rot');
+        playerrot.width = playerrot.height = grid;
+        playerrot.drawImage(img6, x, y);
+
         context.beginPath();
-        context.arc(x, y, this.radius, 0, 2 * Math.PI);
+        context.drawImage(img6, x, y);
         context.fill();
       }
       if(session2 == "character3"){
         context.save();
-        context.fillStyle = 'blue';
+
+        // sp_blau
+        const playerblueCanvas = document.createElement('canvas');
+        const playerblue = playerblueCanvas.getContext('2d');
+        var img5 = document.getElementById('sp_blau');
+        playerblue.width = playerblue.height = grid;
+        playerblue.drawImage(img5, x, y);
+
         context.beginPath();
-        context.arc(x, y, this.radius, 0, 2 * Math.PI);
+        context.drawImage(img5, x, y);
         context.fill();
       }
     }
@@ -383,28 +404,49 @@ setTimeout(function(){
       window.open("http://localhost:2020/player_2_won","_self");
     },
     render() {
-      const x = (this.col + 0.5) * 64;
-      const y = (this.row + 0.5) * 64;
+      const x = (this.col) * 64;
+      const y = (this.row) * 64;
   
       if(session1 == "character1"){
         context.save();
-        context.fillStyle = 'yellow';
+
+        // sp_grün
+        const playerblueCanvas = document.createElement('canvas');
+        const playergrün = playerblueCanvas.getContext('2d');
+        var img7 = document.getElementById('sp_grün');
+        playergrün.width = playergrün.height = grid;
+        playergrün.drawImage(img7, x, y);
+
         context.beginPath();
-        context.arc(x, y, this.radius, 0, 2 * Math.PI);
+        context.drawImage(img7, x, y);
         context.fill();
       }
       if(session1 == "character2"){
         context.save();
-        context.fillStyle = 'white';
+
+        // sp_rot
+        const playerblueCanvas = document.createElement('canvas');
+        const playerrot = playerblueCanvas.getContext('2d');
+        var img6 = document.getElementById('sp_rot');
+        playerrot.width = playerrot.height = grid;
+        playerrot.drawImage(img6, x, y);
+
         context.beginPath();
-        context.arc(x, y, this.radius, 0, 2 * Math.PI);
+        context.drawImage(img6, x, y);
         context.fill();
       }
       if(session1 == "character3"){
         context.save();
-        context.fillStyle = 'blue';
+
+        // sp_blau
+        const playerblueCanvas = document.createElement('canvas');
+        const playerblue = playerblueCanvas.getContext('2d');
+        var img5 = document.getElementById('sp_blau');
+        playerblue.width = playerblue.height = grid;
+        playerblue.drawImage(img5, x, y);
+
         context.beginPath();
-        context.arc(x, y, this.radius, 0, 2 * Math.PI);
+        context.drawImage(img5, x, y);
         context.fill();
       }
     }
@@ -484,7 +526,7 @@ setTimeout(function(){
     }
    // - key (Bomb player2)
    else if (
-    e.which === 189 && !cells[row1][col1] &&
+    e.which === 80 && !cells[row1][col1] &&
     // count the number of bombs the player has placed
     entities.filter((entity) => {
       return entity.type === types.bomb && entity.owner === player2

@@ -13,10 +13,14 @@
       <canvas id="game" width="960px" height="832px"></canvas>
     </div>
     
-   <img src="{{url_for('background', filename='background.png')}}" id="background"/>
+    <img src="{{url_for('background', filename='background.png')}}" id="background"/>
     <img src="{{url_for('hard_wall', filename='hardWall.png')}}" id="hardWall"/>
     <img src="{{url_for('soft_wall', filename='softWall.png')}}" id="softWall"/>
     <img src="{{url_for('up_grade', filename='powerUP.png')}}" id="powerUp"/>
+    <img src="{{url_for('sp_blau', filename='spieler_blau.gif')}}" id="sp_blau">
+    <img src="{{url_for('sp_rot', filename='spieler_rot.gif')}}" id="sp_rot">
+    <img src="{{url_for('sp_grün', filename='spieler_grün.gif')}}" id="sp_grün">
+
     <p id="player1_session">{{get_character_player1}}</p>
     <p id="player2_session">{{get_character_player2}}</p>
 
