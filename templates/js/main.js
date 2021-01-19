@@ -482,9 +482,9 @@ setTimeout(function(){
     else if (e.which === 40) {
       row1++;
     }
-   // num 1 key (Bomb player2)
+   // - key (Bomb player2)
    else if (
-    e.which === 97 && !cells[row1][col1] &&
+    e.which === 189 && !cells[row1][col1] &&
     // count the number of bombs the player has placed
     entities.filter((entity) => {
       return entity.type === types.bomb && entity.owner === player2
