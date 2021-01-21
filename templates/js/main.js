@@ -19,7 +19,6 @@ setTimeout(function(){
   var img2 = document.getElementById('softWall');
   swallCanvas.width = swallCanvas.height = grid;
   swall.drawImage(img2, 0, 0); 
-
   
   // numberBomb
   const numberBombUpCanvas = document.createElement('canvas');
@@ -51,7 +50,7 @@ setTimeout(function(){
     numberBombUp:3,
     bombSizeUp:4,
   };
-   
+
   let entities = [];
   
   let cells = [];
@@ -502,8 +501,8 @@ setTimeout(function(){
     else if (e.which === 40) {
       row1++;
     }
-   // - key (Bomb player2)
-   else if (
+    // - key (Bomb player2)
+    else if (
     e.which === 80 && !cells[row1][col1] &&
     // count the number of bombs the player has placed
     entities.filter((entity) => {
@@ -560,7 +559,7 @@ setTimeout(function(){
     }
   
     // r key (Bomb player1)
-   else if (
+  else if (
     e.which === 82 && !cells[row2][col2] &&
     // count the number of bombs the player has placed
     entities.filter((entity) => {
@@ -575,7 +574,7 @@ setTimeout(function(){
   
   
     // don't move the player if something is already at that position
-     if (!cells[row2][col2])  {
+    if (!cells[row2][col2])  {
       player1.row = row2;
       player1.col = col2;
     }
