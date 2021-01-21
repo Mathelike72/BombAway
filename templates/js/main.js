@@ -19,13 +19,7 @@ setTimeout(function(){
   var img2 = document.getElementById('softWall');
   swallCanvas.width = swallCanvas.height = grid;
   swall.drawImage(img2, 0, 0); 
-  
-  /* canvas for power-up
-  const powerUpCanvas = document.createElement('canvas');
-  const powerUp = powerUpCanvas.getContext('2d');
-  var img3 = document.getElementById('powerUp');
-  powerUpCanvas.width = powerUpCanvas.height = grid;
-  powerUp.drawImage(img3, 0, 0); */
+
   
   // numberBomb
   const numberBombUpCanvas = document.createElement('canvas');
@@ -33,22 +27,6 @@ setTimeout(function(){
   var img3 = document.getElementById('powerUp');
   numberBombUpCanvas.width = numberBombUpCanvas.height = grid;
   numberBombUpCtx.drawImage(img3, 0, 0); 
-
-  //const numberBombUpCtx = numberBombUpCanvas.getContext("2d");
-  //numberBombUpCanvas.width = numberBombUpCanvas.height = grid;
-  
-
-  //numberBombUpCtx.fillStyle = 'black';
-  //numberBombUpCtx.beginPath();
-  //numberBombUpCtx.arc(grid/2, grid/2, grid*0.3 , 0, 2 * Math.PI);
-  //numberBombUpCtx.fill();
-  
-  //numberBombUpCtx.strokeStyle = 'grey';
-  //numberBombUpCtx.lineWidth = 5;
-  //numberBombUpCtx.beginPath();
-  //numberBombUpCtx.arc( grid-20, grid -45, 10, Math.PI, -Math.PI / 2
-  //);
-  //numberBombUpCtx.stroke();
   
   //bombsize
   const bombSizeUpCanvas = document.createElement('canvas');
