@@ -1,95 +1,41 @@
-const grid = 64;
-const numRows = 13;
-const numCols = 15;
+let level = function() {
 
-const types = {
-  wall: '▉',
-  bomb: 2,
-  swall: 1,
-  numberBombUp:3,
-  bombSizeUp:4,
-};
-
-class gamelevel {
-  constructor(types, numRows, numCols) {
-    this.types = types;
-    this.numRows = numRows;
-    this.numCols = numCols;  
-    this.cells = [];
-    this.template = [
-      ['▉','▉','▉','▉','▉', '▉','▉','▉','▉','▉','▉','▉', '▉','▉','▉'],
-      ['▉',    ,    ,    ,    ,    ,    ,    ,    ,   ,    ,'x' ,'x' ,'x' ,'▉'],
-      ['▉',    ,'▉',    ,'▉',    ,'▉',    ,'▉' ,   ,'▉',    ,'▉','x' ,'▉'],
-      ['▉',    ,    ,    ,    ,    ,    ,    ,    ,   ,    ,    ,    ,'x' ,'▉'],
-      ['▉',    ,'▉',    ,'▉',    ,'▉',    ,'▉' ,   ,'▉',    ,'▉',    ,'▉'],
-      ['▉',    ,    ,    ,    ,    ,    ,    ,    ,   ,    ,    ,    ,    ,'▉'],
-      ['▉',    ,'▉',    ,'▉',    ,'▉',    ,'▉' ,   ,'▉',    ,'▉',    ,'▉'],
-      ['▉',    ,    ,    ,    ,    ,    ,    ,    ,   ,    ,    ,    ,    ,'▉'],
-      ['▉',    ,'▉',    ,'▉',    ,'▉',    ,'▉' ,   ,'▉',    ,'▉',    ,'▉'],
-      ['▉','x' ,    ,    ,    ,    ,    ,    ,    ,   ,    ,    ,    ,    ,'▉'],
-      ['▉','x' ,'▉',    ,'▉',    ,'▉',    ,'▉' ,   ,'▉',    ,'▉',    ,'▉'],
-      ['▉','x' ,'x' ,'x' ,    ,    ,    ,    ,    ,   ,    ,    ,    ,    ,'▉'],
-      ['▉','▉','▉','▉','▉', '▉','▉','▉','▉','▉','▉','▉', '▉','▉','▉'],
-    ];
-  }
-  
-  // populate the level with objects
-  generateLevel() {
-    //cells = [];
-  
-    for (let row = 0; row < this.numRows; row++) {
-      this.cells[row] = [];
-  
-      for (let col = 0; col < this.numCols; col++) {
-  
-        // 80% chance cells turn soft wall
-        if (!this.template[row][col] &&  Math.random() < 0.7){
-          this.cells[row][col] = types.swall;
-        }
-        // All Walls on template to Walls. 
-        else if (this.template[row][col] === this.types.wall) {
-          this.cells[row][col] = this.types.wall;
-        }
-      }
-    }
-  }
 }
 
-playboard = new gamelevel(types, numRows, numCols);
 
-// start the game
-playboard.generateLevel(); //Where the blocks spawn
 
 setTimeout(function(){
 
   const canvas = document.getElementById('game'); //Where the game is being displayed
   const context = canvas.getContext('2d');
+  const grid = 64;
+  const numRows = 13;
+  const numCols = 15;
+  
   // canvas for unbreakable bricks
   const wallCanvas = document.createElement('canvas');
   const wall = wallCanvas.getContext('2d');
-  // canvas for breakable bricks
-  const swallCanvas = document.createElement('canvas');
-  const swall = swallCanvas.getContext('2d');
-  // numberBomb
-  const numberBombUpCanvas = document.createElement('canvas');
-  const numberBombUpCtx = numberBombUpCanvas.getContext('2d');
-  //bombsize
-  const bombSizeUpCanvas = document.createElement('canvas');
-  const bombSizeUpCtx = bombSizeUpCanvas.getContext('2d');
-  
   var img1 = document.getElementById('hardWall');
-  var img2 = document.getElementById('softWall');
-  var img3 = document.getElementById('powerUp');
-
   wallCanvas.width = wallCanvas.height = grid;
   wall.drawImage(img1, 0, 0);
   
+  // canvas for breakable bricks
+  const swallCanvas = document.createElement('canvas');
+  const swall = swallCanvas.getContext('2d');
+  var img2 = document.getElementById('softWall');
   swallCanvas.width = swallCanvas.height = grid;
   swall.drawImage(img2, 0, 0); 
   
+  // numberBomb
+  const numberBombUpCanvas = document.createElement('canvas');
+  const numberBombUpCtx = numberBombUpCanvas.getContext('2d');
+  var img3 = document.getElementById('powerUp');
   numberBombUpCanvas.width = numberBombUpCanvas.height = grid;
   numberBombUpCtx.drawImage(img3, 0, 0); 
   
+  //bombsize
+  const bombSizeUpCanvas = document.createElement('canvas');
+  const bombSizeUpCtx = bombSizeUpCanvas.getContext('2d');
   bombSizeUpCanvas.width = bombSizeUpCanvas.height = grid;
   
   bombSizeUpCtx.fillStyle = 'darkred';
@@ -103,8 +49,54 @@ setTimeout(function(){
   // Player2 Session Cookie
   session2 = document.getElementById('player2_session').innerHTML;
   
+  const types = {
+    wall: '▉',
+    bomb: 2,
+    swall: 1,
+    numberBombUp:3,
+    bombSizeUp:4,
+  };
+
   let entities = [];
   
+  let cells = [];
+  const template = [
+    ['▉','▉','▉','▉','▉', '▉','▉','▉','▉','▉','▉','▉', '▉','▉','▉'],
+    ['▉',    ,    ,    ,    ,    ,    ,    ,    ,   ,    ,'x' ,'x' ,'x' ,'▉'],
+    ['▉',    ,'▉',    ,'▉',    ,'▉',    ,'▉' ,   ,'▉',    ,'▉','x' ,'▉'],
+    ['▉',    ,    ,    ,    ,    ,    ,    ,    ,   ,    ,    ,    ,'x' ,'▉'],
+    ['▉',    ,'▉',    ,'▉',    ,'▉',    ,'▉' ,   ,'▉',    ,'▉',    ,'▉'],
+    ['▉',    ,    ,    ,    ,    ,    ,    ,    ,   ,    ,    ,    ,    ,'▉'],
+    ['▉',    ,'▉',    ,'▉',    ,'▉',    ,'▉' ,   ,'▉',    ,'▉',    ,'▉'],
+    ['▉',    ,    ,    ,    ,    ,    ,    ,    ,   ,    ,    ,    ,    ,'▉'],
+    ['▉',    ,'▉',    ,'▉',    ,'▉',    ,'▉' ,   ,'▉',    ,'▉',    ,'▉'],
+    ['▉','x' ,    ,    ,    ,    ,    ,    ,    ,   ,    ,    ,    ,    ,'▉'],
+    ['▉','x' ,'▉',    ,'▉',    ,'▉',    ,'▉' ,   ,'▉',    ,'▉',    ,'▉'],
+    ['▉','x' ,'x' ,'x' ,    ,    ,    ,    ,    ,   ,    ,    ,    ,    ,'▉'],
+    ['▉','▉','▉','▉','▉', '▉','▉','▉','▉','▉','▉','▉', '▉','▉','▉'],
+  ];
+  
+  
+  // populate the level with objects
+  function generateLevel() {
+    cells = [];
+  
+    for (let row = 0; row < numRows; row++) {
+      cells[row] = [];
+  
+      for (let col = 0; col < numCols; col++) {
+  
+        // 80% chance cells turn soft wall
+        if (!template[row][col] &&  Math.random() < 0.7){
+          cells[row][col] = types.swall;
+        }
+        // All Walls on template to Walls. 
+        else if (template[row][col] === types.wall) {
+          cells[row][col] = types.wall;
+        }
+      }
+    }
+  }
   
   
   
@@ -193,13 +185,13 @@ setTimeout(function(){
           console.log("1 got exploded.");                                 //  |
           player1.reset();                                                //  V
           player2.reset();
-          playboard.generateLevel();
+          generateLevel();
       }
       if (TestPlayer(player1, col, row)) {
           console.log("2 got exploded.");
           player2.reset();
           player1.reset();
-          playboard.generateLevel();                                                //  A
+          generateLevel();                                                //  A
       }    
   
         // stop the explosion if hit anything
@@ -509,7 +501,7 @@ setTimeout(function(){
     // update and render everything in template 
     for (let row = 0; row < numRows; row++) {
       for (let col = 0; col < numCols; col++) {
-        switch(playboard.cells[row][col]) {
+        switch(cells[row][col]) {
           case types.wall:
             context.drawImage(wallCanvas, col * grid, row * grid);
             break;
@@ -583,26 +575,26 @@ setTimeout(function(){
     // place bomb
     const bomb = new Bomb(row1, col1, player2.bombSize, player2);
     entities.push(bomb);
-    playboard.cells[row1][col1] = types.bomb;
+    cells[row1][col1] = types.bomb;
     }
   
     // don't move the player if something is already at that position
-    if (!playboard.cells[row1][col1]) {
+    if (!cells[row1][col1]) {
       player2.row = row1;
       player2.col = col1;
     }
   
-    else if (playboard.cells[row1][col1] === types.numberBombUp){
+    else if (cells[row1][col1] === types.numberBombUp){
       console.log("numberBombUp ramasse");
-      playboard.cells[row1][col1] = 0;
+      cells[row1][col1] = 0;
       player2.row = row1;
       player2.col = col1;
       player2.numBombs++;
   }
   
-  else if (playboard.cells[row1][col1] === types.bombSizeUp){
+  else if (cells[row1][col1] === types.bombSizeUp){
       console.log("numberBombUp ramasse");
-      playboard.cells[row1][col1] = 0;
+      cells[row1][col1] = 0;
       player2.row = row1;
       player2.col = col1;
       player2.bombSize++;     
@@ -665,5 +657,7 @@ setTimeout(function(){
   }    
   });
   
+  // start the game
+  generateLevel(); //Where the blocks spawn
   requestAnimationFrame(loop);
   }, 200);

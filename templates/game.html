@@ -20,6 +20,11 @@
     <img src="{{url_for('sp_blau', filename='spieler_blau.gif')}}" id="sp_blau">
     <img src="{{url_for('sp_rot', filename='spieler_rot.gif')}}" id="sp_rot">
     <img src="{{url_for('sp_grün', filename='spieler_grün.gif')}}" id="sp_grün">
+    
+    <!--Versuch Animationen-->
+    <img src="{{url_for('image3a', filename='spieler_blau1.png')}}" id="sp_blau1">
+    <img src="{{url_for('image3b', filename='spieler_blau2.png')}}" id="sp_blau2">
+    <img src="{{url_for('image3c', filename='spieler_blau3.png')}}" id="sp_blau3">
 
     <p id="player1_session">{{get_character_player1}}</p>
     <p id="player2_session">{{get_character_player2}}</p>
@@ -27,8 +32,3 @@
     <script type=text/javascript src="{{url_for('game_script', filename='main.js')}}"></script>
   </body>
 </html>
-
-<!--Verbindungen von Python Server-->
-<!--"{{url_for('hard_wall', filename='hardWall.png')}}"-->
-<!--"{{url_for('game_script', filename='main.js')}}"-->
-<!--"{{url_for('game_stylesheet', filename='style.css')}}"-->

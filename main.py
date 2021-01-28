@@ -174,7 +174,7 @@ def sp_grün():
 # =============================================================================================
 
 
-# Characters
+# Characters Auswahl
 @app.route('/image1')
 def image1():
     return send_from_directory(os.path.join(app.root_path, 'docs/img/designs'), 'spieler_grün.gif')
@@ -188,6 +188,21 @@ def image2():
 @app.route('/image3')
 def image3():
     return send_from_directory(os.path.join(app.root_path, 'docs/img/designs'), 'spieler_blau.gif')
+
+# =================================================================================================
+
+#Versuch Animationenen
+@app.route('/image3a')
+def image3a():
+    return send_from_directory(os.path.join(app.root_path, 'docs/img/designs'), 'spieler_blau1.png')
+
+@app.route('/image3b')
+def image3b():
+    return send_from_directory(os.path.join(app.root_path, 'docs/img/designs'), 'spieler_blau2.png')
+
+@app.route('/image3c')
+def image3c():
+    return send_from_directory(os.path.join(app.root_path, 'docs/img/designs'), 'spieler_blau3.png')
 
 
 # =============================================================================================
